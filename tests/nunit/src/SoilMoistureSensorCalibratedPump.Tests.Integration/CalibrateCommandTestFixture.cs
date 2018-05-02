@@ -183,7 +183,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 				Console.WriteLine("Value: " + value);
 
-				Assert.IsTrue(IsWithinRange(expectedRaw, value, 10), "Calibration value is outside the valid range: " + value);
+				Assert.IsTrue(IsWithinRange(expectedRaw, value, 11), "Calibration value is outside the valid range: " + value);
 
 
 			} catch (IOException ex) {
