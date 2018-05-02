@@ -28,28 +28,26 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public string GetDevicePort()
 		{
-			var irrigatorPortName = Environment.GetEnvironmentVariable ("IRRIGATOR_PORT");
+			var devicePort = Environment.GetEnvironmentVariable ("IRRIGATOR_PORT");
 			
-			if (String.IsNullOrEmpty(irrigatorPortName))
-				irrigatorPortName = "/dev/ttyUSB0";
+			if (String.IsNullOrEmpty(devicePortName))
+				devicePort = "/dev/ttyUSB0";
 			
-			Console.WriteLine ("Device port: " + irrigatorPortName);
+			Console.WriteLine ("Device port: " + devicePort);
 			
-			return irrigatorPortName;
+			return devicePort;
 		}
 
 		public string GetSimulatorPort()
 		{
-			var simulatorPortName = "/dev/ttyUSB1";
-
-			string[] ports = SerialPort.GetPortNames ();
-			var multipleDevicePairsDetected = Array.IndexOf (ports, "/dev/ttyUSB2") > -1;
-			if (multipleDevicePairsDetected) {
-				simulatorPortName = "/dev/ttyUSB3";
-			}
-
-			Console.WriteLine ("Simulator port: " + simulatorPortName);
-			return simulatorPortName;
+			var simulatorPort = Environment.GetEnvironmentVariable ("IRRIGATOR_SIMULATOR_PORT");
+			
+			if (String.IsNullOrEmpty(simulatorPort))
+				devicePort = "/dev/ttyUSB1";
+			
+			Console.WriteLine ("Simulator port: " + simulatorPort);
+			
+			return simulatorPort;
 		}
 
 		public int GetSerialBaudRate()
