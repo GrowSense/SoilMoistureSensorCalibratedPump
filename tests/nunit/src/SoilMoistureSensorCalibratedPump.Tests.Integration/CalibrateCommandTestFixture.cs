@@ -141,7 +141,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 					var values = ParseOutputLine(GetLastDataLine(output));
 
 					// Get the raw soil moisture value
-					var rawValue = values["R"];
+					var rawValue = Convert.ToInt32(values["R"]);
 
 
 					Console.WriteLine("");
@@ -179,7 +179,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 				var data = ParseOutputLine(GetLastDataLine(output));
 
-				var value = data[command.Substring(0, 1)];
+				var value = Convert.ToInt32(data[command.Substring(0, 1)]);
 
 				Console.WriteLine("Value: " + value);
 
@@ -196,38 +196,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				if (soilMoistureSimulator != null)
 					soilMoistureSimulator.Disconnect ();
 			}
-		}
-
-		public Dictionary<string, int> ParseOutputLine(string outputLine)
-		{
-			var dictionary = new Dictionary<string, int> ();
-
-			if (IsValidOutputLine (outputLine)) {
-				foreach (var pair in outputLine.Split(';')) {
-					var parts = pair.Split (':');
-
-					if (parts.Length == 2) {
-						var key = parts [0];
-						var value = 0;
-						try {
-							value = Convert.ToInt32 (parts [1]);
-
-							dictionary [key] = value;
-						} catch {
-							Console.WriteLine ("Warning: Invalid key/value pair '" + pair + "'");
-						}
-					}
-				}
-			}
-
-			return dictionary;
-		}
-
-		public bool IsValidOutputLine(string outputLine)
-		{
-			var dataPrefix = "D;";
-
-			return outputLine.StartsWith(dataPrefix);
 		}
 	}
 }

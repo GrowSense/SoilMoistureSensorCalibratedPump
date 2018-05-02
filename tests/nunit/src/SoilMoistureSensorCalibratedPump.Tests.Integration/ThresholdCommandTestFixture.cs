@@ -167,7 +167,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				
 				Assert.IsTrue(data.ContainsKey("T"));
 
-				var newThresholdValue = data["T"];
+				var newThresholdValue = Convert.ToInt32(data["T"]);
 
 				Console.WriteLine("Threshold: " + newThresholdValue);
 

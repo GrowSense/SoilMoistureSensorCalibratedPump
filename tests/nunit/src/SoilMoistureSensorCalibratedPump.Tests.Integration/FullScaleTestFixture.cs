@@ -189,7 +189,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
       
 			Assert.IsTrue (data.ContainsKey ("C"), "'C' key not found");
 
-			var calibratedValue = data ["C"];
+			var calibratedValue = Convert.ToInt32(data ["C"]);
 
 			Console.WriteLine ("Calibrated value: " + calibratedValue);
 
@@ -204,7 +204,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
       
 			var expectedRawValue = ArduinoConvert.PercentageToAnalog (percentageValue);
       
-			var rawValueIsWithinRange = IsWithinRange (expectedRawValue, data ["R"], 60);
+			var rawValueIsWithinRange = IsWithinRange (expectedRawValue, Convert.ToInt32(data ["R"]), 60);
       
 			Assert.IsTrue (rawValueIsWithinRange, "Invalid value for 'R' (raw value): " + data["R"]);
       
