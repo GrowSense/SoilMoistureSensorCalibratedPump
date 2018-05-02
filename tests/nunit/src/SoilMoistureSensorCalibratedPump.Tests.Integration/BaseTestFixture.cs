@@ -28,10 +28,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public string GetDevicePort()
 		{
-			var host = Environment.GetEnvironmentVariable ("IRRIGATOR_PORT");
+			var irrigatorPortName = Environment.GetEnvironmentVariable ("IRRIGATOR_PORT");
 			
-			if (String.IsNullOrEmpty(host))
-				Assert.Fail("IRRIGATOR_PORT environment variable is not set")
+			if (String.IsNullOrEmpty(irrigatorPortName))
+				Assert.Fail("IRRIGATOR_PORT environment variable is not set");
 			
 			/*var irrigatorPortName = "/dev/ttyUSB0";
 
@@ -40,10 +40,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			if (multipleDevicePairsDetected) {
 				irrigatorPortName = "/dev/ttyUSB2";
 			}
-
+			*/
 			Console.WriteLine ("Device port: " + irrigatorPortName);
-
-			return irrigatorPortName;*/
+			
+			return irrigatorPortName;
 		}
 
 		public string GetSimulatorPort()
