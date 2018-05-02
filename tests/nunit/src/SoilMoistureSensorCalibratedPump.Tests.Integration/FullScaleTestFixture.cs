@@ -40,7 +40,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				irrigator.Open ();
 				soilMoistureSimulator.Connect ();
 
-				Thread.Sleep (5000);
+				Thread.Sleep (2000);
 
 				Console.WriteLine("");
 				Console.WriteLine("Reading the output from the device...");
@@ -55,27 +55,11 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				// Reset defaults
 				irrigator.WriteLine ("X");
 
-				Thread.Sleep (1000);
-
 				// Set read interval to 1
 				irrigator.WriteLine ("V1");
 
-				Thread.Sleep (1000);
-
 				// Set pump burst off time to 0
 				irrigator.WriteLine ("O0");
-
-				Thread.Sleep (1000);
-
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
-
-				// Read the output
-				output = irrigator.Read ();
-
-				Console.WriteLine (output);
-				Console.WriteLine ("");
 
 				// Reverse calibration (if needed)
 				if (CalibrationIsReversedByDefault)
