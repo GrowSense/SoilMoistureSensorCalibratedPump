@@ -93,12 +93,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				// Reset defaults
 				irrigator.WriteLine ("X");
 
-				Thread.Sleep(2000);
-
 				// Set read interval to 1
 				irrigator.WriteLine ("V1");
 
-				Thread.Sleep(2000);
+				Thread.Sleep(1000);
 
 				Console.WriteLine("");
 				Console.WriteLine("Reading the output from the device...");
@@ -109,8 +107,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 				Console.WriteLine (output);
 				Console.WriteLine ("");
-
-				Thread.Sleep(1000);
 
 				// If a percentage is specified for the simulator then set the simulated soil moisture value (otherwise skip)
 				if (simulatedSoilMoisturePercentage > -1)
@@ -123,9 +119,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 					soilMoistureSimulator.AnalogWritePercentage (9, simulatedSoilMoisturePercentage);
 
 					Thread.Sleep(2000);
-					// Works but slow
-					//Thread.Sleep(8000);
-					//Thread.Sleep(12000);
 
 					Console.WriteLine("");
 					Console.WriteLine("Reading output from the device...");
@@ -142,7 +135,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 					// Get the raw soil moisture value
 					var rawValue = Convert.ToInt32(values["R"]);
-
 
 					Console.WriteLine("");
 					Console.WriteLine("Checking the device...");

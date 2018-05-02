@@ -55,8 +55,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				// Reset defaults
 				irrigator.WriteLine ("X");
 
-				Thread.Sleep(1000);
-
 				// Set output interval to 1
 				irrigator.WriteLine ("V1");
 
@@ -72,8 +70,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				Console.WriteLine (output);
 				Console.WriteLine ("");
 
-				Thread.Sleep(1000);
-
 				var pumpBurstOffTime = 10; // Seconds
 
 				var command = "O" + pumpBurstOffTime;
@@ -85,7 +81,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				// Send the command
 				irrigator.WriteLine (command);
 
-				Thread.Sleep(3000);
+				Thread.Sleep(2000);
 
 				Console.WriteLine("");
 				Console.WriteLine("Reading the output from the device...");
