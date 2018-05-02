@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using duinocom;
 using System.Threading;
@@ -73,21 +73,18 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 				// Reset defaults
 				irrigator.WriteLine ("X");
-
-				Thread.Sleep(1000);
 				
 				// Set output interval to 1
 				irrigator.WriteLine ("V1");
-
-				Thread.Sleep(1000);
 				
 				if (CalibrationIsReversedByDefault)
 				{
 					// Reverse calibration to make it more readable
 					irrigator.WriteLine ("R");
-	
-					Thread.Sleep(1000);
 				}
+				
+	
+				Thread.Sleep(1000);
 
 				Console.WriteLine("");
 				Console.WriteLine("Reading the output from the device...");
