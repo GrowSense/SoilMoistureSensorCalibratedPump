@@ -8,11 +8,11 @@ if [ $SKIP_CI = 0 ]; then
 
   if [ "$BRANCH" = "dev" ];  then
 
-    git commit buildnumber.txt -m "Updated version [ci-skip]" && \
+    git commit buildnumber.txt -m "Updated version [ci skip]" && \
     git push origin $BRANCH --quiet
   else
     echo "Skipping push version. Only pushed for 'dev' branch not '$BRANCH'"
   fi
 else
-  echo "Skipping push version [ci-skip]"
+  echo "Skipping push version [ci skip]"
 fi
