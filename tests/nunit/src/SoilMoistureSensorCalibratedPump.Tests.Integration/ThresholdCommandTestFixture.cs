@@ -96,8 +96,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				Console.WriteLine (output);
 				Console.WriteLine ("");
 
-				Thread.Sleep(1000);
-
 				// If a percentage is specified for the simulator then set the simulated soil moisture value (otherwise skip)
 				if (simulatedSoilMoisturePercentage > -1)
 				{

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using duinocom;
 using System.Threading;
@@ -42,7 +42,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			Console.WriteLine ("");
 			Console.WriteLine ("==============================");
-			Console.WriteLine ("Starting set threshold command test");
+			Console.WriteLine ("Starting set pump status test");
 			Console.WriteLine ("");
 			Console.WriteLine ("Pump: " + pumpStatus);
 			Console.WriteLine ("Simulated soil moisture percentage: " + simulatedSoilMoisturePercentage);
@@ -83,25 +83,19 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				// Reset defaults
 				irrigator.WriteLine ("X");
 
-				Thread.Sleep(1000);
-
 				// Set read/output interval to 1 sec
 				irrigator.WriteLine ("V1");
 
-				Thread.Sleep(1000);
-
 				// Set burst off time to 0 seconds
 				irrigator.WriteLine ("O0");
-
-				Thread.Sleep(1000);
 
 				if (CalibrationIsReversedByDefault)
 				{
 					// Reverse calibration values
 					irrigator.WriteLine ("R");
-
-					Thread.Sleep(1000);
 				}
+
+				Thread.Sleep(1000);
 
 				Console.WriteLine("");
 				Console.WriteLine("Reading the output from the device...");
@@ -113,8 +107,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				Console.WriteLine (output);
 				Console.WriteLine ("");
 
-				Thread.Sleep(1000);
-
 				// If a percentage is specified for the simulator then set the simulated soil moisture value (otherwise skip)
 				if (simulatedSoilMoisturePercentage > -1)
 				{
@@ -125,7 +117,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 					// Set the simulated soil moisture
 					soilMoistureSimulator.AnalogWritePercentage (9, simulatedSoilMoisturePercentage);
 
-					Thread.Sleep(5000);
+					Thread.Sleep(2000);
 
 					Console.WriteLine("");
 					Console.WriteLine("Reading output from the device...");
@@ -147,7 +139,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				// Send the command
 				irrigator.WriteLine (command);
 
-				Thread.Sleep(6000);
+				Thread.Sleep(2000);
 
 				Console.WriteLine("");
 				Console.WriteLine("Reading the output from the device...");
