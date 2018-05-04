@@ -77,7 +77,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				Console.WriteLine (output);
 				Console.WriteLine ("");
 
-				int soilMoistureValue = 5;
+				int soilMoistureValue = 10;
 
 				for (int i = 0; i <= totalCyclesToRun; i++) {
 					soilMoistureValue = RunCycle (soilMoistureValue, CalibrationIsReversedByDefault, irrigator, soilMoistureSimulator);
@@ -97,12 +97,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		
 		public int RunCycle(int soilMoisturePercentage, bool calibrationIsReversed, SerialClient irrigator, ArduinoSerialDevice soilMoistureSimulator)
 		{
-		
 			Console.WriteLine ("");
 			Console.WriteLine ("==============================");
 			Console.WriteLine ("Starting test cycle");
 			Console.WriteLine ("");
-      
       
 			int percentageValue = soilMoisturePercentage;
       
@@ -134,10 +132,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			if (pumpPinValue) {
 				Console.WriteLine ("Pump pin is high. Increasing simulated soil moisture.");
-				soilMoisturePercentage += 10;
+				soilMoisturePercentage += 20;
 			} else {
 				Console.WriteLine ("Pump pin is low. Decreasing simulated soil moisture.");
-				soilMoisturePercentage -= 4;
+				soilMoisturePercentage -= 5;
 			}
 
 			Console.WriteLine ("");
@@ -148,8 +146,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			if (soilMoisturePercentage > 100)
 				Assert.Fail ("Soil moisture hit 100%");
 
-			if (soilMoisturePercentage < 0)
-				Assert.Fail ("Soil moisture hit 0%");
+			if (soilMoisturePercentage < 20)
+				Assert.Fail ("Soil moisture dropped below 20%");
       
 			Console.WriteLine ("New soil moisture percentage: " + soilMoisturePercentage);
 
