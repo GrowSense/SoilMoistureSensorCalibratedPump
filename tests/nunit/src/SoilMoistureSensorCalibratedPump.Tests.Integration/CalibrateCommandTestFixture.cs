@@ -143,7 +143,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 					Console.WriteLine("Expected raw: " + expectedRaw);
 
 					// Ensure the raw value is in the valid range
-					Assert.IsTrue(IsWithinRange(expectedRaw, rawValue, 15), "Raw value is outside the valid range: " + rawValue);
+					Assert.IsTrue(IsWithinRange(expectedRaw, rawValue, 20), "Raw value is outside the valid range: " + rawValue);
 				}
 
 				Console.WriteLine("");
@@ -175,7 +175,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 				Console.WriteLine("Value: " + value);
 
-				Assert.IsTrue(IsWithinRange(expectedRaw, value, 15), "Calibration value is outside the valid range: " + value);
+				// If the value is being passed via simulator then allow a margin of error, otherwise it should be exact
+				var allowableError = (simulatedSoilMoisturePercentage > -1 ? 20 : 0);
+
+				Assert.IsTrue(IsWithinRange(expectedRaw, value, 20), "Calibration value is outside the valid range: " + value);
 
 
 			} catch (IOException ex) {
