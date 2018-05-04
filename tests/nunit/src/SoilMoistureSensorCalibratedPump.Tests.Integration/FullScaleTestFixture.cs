@@ -23,7 +23,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			SerialClient irrigator = null;
 			ArduinoSerialDevice soilMoistureSimulator = null;
 
-			int totalCyclesToRun = 20;
+			int totalCyclesToRun = 10;
 
 			var irrigatorPortName = GetDevicePort ();
 			var simulatorPortName = GetSimulatorPort ();
@@ -137,7 +137,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				soilMoisturePercentage += 10;
 			} else {
 				Console.WriteLine ("Pump pin is low. Decreasing simulated soil moisture.");
-				soilMoisturePercentage -= 1;
+				soilMoisturePercentage -= 4;
 			}
 
 			Console.WriteLine ("");
