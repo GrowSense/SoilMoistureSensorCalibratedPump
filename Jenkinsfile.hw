@@ -1,11 +1,7 @@
 pipeline {
     agent any
-    triggers {
-        pollSCM 'H/10 * * * *'
-    }
     options {
         disableConcurrentBuilds();
-        skipDefaultCheckout();
     }
     stages {
         stage('Checkout') {
