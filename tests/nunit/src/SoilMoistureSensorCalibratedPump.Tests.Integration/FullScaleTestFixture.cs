@@ -139,7 +139,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			}
 
 			Console.WriteLine ("");
-			Console.WriteLine ("Checking soil moisture percentage is between 0 and 100");
+			Console.WriteLine ("Checking soil moisture percentage is between 20 and 100");
 			Console.WriteLine ("Currently: " + soilMoisturePercentage);
 			Console.WriteLine ("");
 
