@@ -19,9 +19,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			SetDeviceReadInterval(ReadInterval);
 
-			var data = WaitForDataEntry();
+			var dataEntry = WaitForDataEntry();
 
-			AssertDataValueEquals(data, "V", ReadInterval);
+			AssertDataValueEquals(dataEntry, "V", ReadInterval);
 		}
 	}
 }
