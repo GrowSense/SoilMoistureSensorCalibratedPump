@@ -59,6 +59,9 @@
     <Compile Include="SoilMoistureSensorPowerTestHelper.cs" />
     <Compile Include="FullScaleIrrigatorTestHelper.cs" />
     <Compile Include="GreenSenseIrrigatorHardwareTestHelper.cs" />
+    <Compile Include="PumpBurstOffTimeCommandTestHelper.cs" />
+    <Compile Include="PumpBurstOnTimeCommandTestHelper.cs" />
+    <Compile Include="ThresholdCommandTestHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,124 +10,57 @@ using System.IO.Ports;
 
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-	[TestFixture(Category="Integration")]
+	[TestFixture(Category = "Integration")]
 	public class PumpBurstOffTimeCommandTestFixture : BaseTestFixture
 	{
 		[Test]
-		public void Test_SetPumpBurstOffTime()
+		public void Test_SetPumpBurstOffTime_0Seconds()
 		{
+			using (var helper = new PumpBurstOffTimeCommandTestHelper())
+			{
+				helper.PumpBurstOffTime = 0;
 
-			Console.WriteLine ("");
-			Console.WriteLine ("==============================");
-			Console.WriteLine ("Starting set pump burst off time command test");
-			Console.WriteLine ("");
+				helper.DevicePort = GetDevicePort();
+				helper.DeviceBaudRate = GetSerialBaudRate();
 
-			SerialClient irrigator = null;
-			ArduinoSerialDevice soilMoistureSimulator = null;
+				helper.SimulatorPort = GetSimulatorPort();
+				helper.SimulatorBaudRate = GetSerialBaudRate();
 
-			var irrigatorPortName = GetDevicePort();
+				helper.TestPumpBurstOffTimeCommand();
+			}
+		}
 
-			try {
-				irrigator = new SerialClient (irrigatorPortName, GetSerialBaudRate());
+		[Test]
+		public void Test_SetPumpBurstOffTime_1Seconds()
+		{
+			using (var helper = new PumpBurstOffTimeCommandTestHelper())
+			{
+				helper.PumpBurstOffTime = 1;
 
-				Console.WriteLine("");
-				Console.WriteLine("Connecting to serial devices...");
-				Console.WriteLine("");
+				helper.DevicePort = GetDevicePort();
+				helper.DeviceBaudRate = GetSerialBaudRate();
 
-				irrigator.Open ();
+				helper.SimulatorPort = GetSimulatorPort();
+				helper.SimulatorBaudRate = GetSerialBaudRate();
 
-				Thread.Sleep (2000);
+				helper.TestPumpBurstOffTimeCommand();
+			}
+		}
 
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
+		[Test]
+		public void Test_SetPumpBurstOffTime_5Seconds()
+		{
+			using (var helper = new PumpBurstOffTimeCommandTestHelper())
+			{
+				helper.PumpBurstOffTime = 5;
 
-				// Read the output
-				var output = irrigator.Read ();
+				helper.DevicePort = GetDevicePort();
+				helper.DeviceBaudRate = GetSerialBaudRate();
 
-				Console.WriteLine (output);
-				Console.WriteLine ("");
+				helper.SimulatorPort = GetSimulatorPort();
+				helper.SimulatorBaudRate = GetSerialBaudRate();
 
-				Console.WriteLine("");
-				Console.WriteLine("Sending 'X' command to device to reset to defaults...");
-				Console.WriteLine("");
-
-				// Reset defaults
-				irrigator.WriteLine ("X");
-
-				// Set output interval to 1
-				irrigator.WriteLine ("V1");
-
-				Thread.Sleep(1000);
-
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
-
-				// Read the output
-				output = irrigator.Read ();
-
-				Console.WriteLine (output);
-				Console.WriteLine ("");
-
-				var pumpBurstOffTime = 10; // Seconds
-
-				var command = "O" + pumpBurstOffTime;
-
-				Console.WriteLine("");
-				Console.WriteLine("Sending command to device: " + command);
-				Console.WriteLine("");
-
-				// Send the command
-				irrigator.WriteLine (command);
-
-				Thread.Sleep(2000);
-
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
-
-				// Read the output
-				output = irrigator.Read ();
-
-				Console.WriteLine (output);
-				Console.WriteLine ("");
-
-				Console.WriteLine("");
-				Console.WriteLine("Checking the output...");
-				Console.WriteLine("");
-
-				var data = ParseOutputLine(GetLastDataLine(output));
-
-				Console.WriteLine ("");
-				Console.WriteLine ("Checking pump burst off time value");
-
-				Assert.IsTrue(data.ContainsKey("O"), "'O' (burst off time) key not found.");
-
-				var newPumpBurstOffTimeValue = Convert.ToInt32(data["O"]);
-
-				Console.WriteLine("Pump burst off time: " + newPumpBurstOffTimeValue);
-
-				// If the pumpBurstOffTime was specified in the command then the output should be exact
-				if (pumpBurstOffTime > 0)
-					Assert.AreEqual(pumpBurstOffTime, newPumpBurstOffTimeValue, "Invalid pump burst off time: " + newPumpBurstOffTimeValue);
-				else // Otherwise going by the simulated soil moisture sensor theres a small margin of error
-				{
-					var pumpBurstOffTimeIsWithinRange = IsWithinRange (pumpBurstOffTime, newPumpBurstOffTimeValue, 3);
-
-					Assert.IsTrue (pumpBurstOffTimeIsWithinRange, "Invalid pump burst off time: " + newPumpBurstOffTimeValue);
-
-				}
-
-			} catch (IOException ex) {
-				Console.WriteLine (ex.ToString ());
-				Assert.Fail ();
-			} finally {
-				if (irrigator != null)
-					irrigator.Close ();
-
-				if (soilMoistureSimulator != null)
-					soilMoistureSimulator.Disconnect ();
+				helper.TestPumpBurstOffTimeCommand();
 			}
 		}
 	}

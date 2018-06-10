@@ -10,124 +10,40 @@ using System.IO.Ports;
 
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-	[TestFixture(Category="Integration")]
+	[TestFixture(Category = "Integration")]
 	public class PumpBurstOnTimeCommandTestFixture : BaseTestFixture
 	{
 		[Test]
-		public void Test_SetPumpBurstOnTime()
+		public void Test_SetPumpBurstOnTime_1Seconds()
 		{
+			using (var helper = new PumpBurstOnTimeCommandTestHelper())
+			{
+				helper.PumpBurstOnTime = 1;
 
-			Console.WriteLine ("");
-			Console.WriteLine ("==============================");
-			Console.WriteLine ("Starting set pump burst on time command test");
-			Console.WriteLine ("");
+				helper.DevicePort = GetDevicePort();
+				helper.DeviceBaudRate = GetSerialBaudRate();
 
-			SerialClient irrigator = null;
-			ArduinoSerialDevice soilMoistureSimulator = null;
+				helper.SimulatorPort = GetSimulatorPort();
+				helper.SimulatorBaudRate = GetSerialBaudRate();
 
-			var irrigatorPortName = GetDevicePort();
+				helper.TestPumpBurstOnTimeCommand();
+			}
+		}
 
-			try {
-				irrigator = new SerialClient (irrigatorPortName, GetSerialBaudRate());
+		[Test]
+		public void Test_SetPumpBurstOnTime_5Seconds()
+		{
+			using (var helper = new PumpBurstOnTimeCommandTestHelper())
+			{
+				helper.PumpBurstOnTime = 5;
 
-				Console.WriteLine("");
-				Console.WriteLine("Connecting to serial devices...");
-				Console.WriteLine("");
+				helper.DevicePort = GetDevicePort();
+				helper.DeviceBaudRate = GetSerialBaudRate();
 
-				irrigator.Open ();
+				helper.SimulatorPort = GetSimulatorPort();
+				helper.SimulatorBaudRate = GetSerialBaudRate();
 
-				Thread.Sleep (2000);
-
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
-
-				// Read the output
-				var output = irrigator.Read ();
-
-				Console.WriteLine (output);
-				Console.WriteLine ("");
-
-				Console.WriteLine("");
-				Console.WriteLine("Sending 'X' command to device to reset to defaults...");
-				Console.WriteLine("");
-
-				// Reset defaults
-				irrigator.WriteLine ("X");
-				
-				// Set output interval to 1
-				irrigator.WriteLine ("V1");
-
-				Thread.Sleep(1000);
-
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
-
-				// Read the output
-				output = irrigator.Read ();
-
-				Console.WriteLine (output);
-				Console.WriteLine ("");
-
-				var pumpBurstOnTime = 10; // Seconds
-
-				var command = "B" + pumpBurstOnTime;
-
-				Console.WriteLine("");
-				Console.WriteLine("Sending command to device: " + command);
-				Console.WriteLine("");
-
-				// Send the command
-				irrigator.WriteLine (command);
-
-				Thread.Sleep(2000);
-
-				Console.WriteLine("");
-				Console.WriteLine("Reading the output from the device...");
-				Console.WriteLine("");
-
-				// Read the output
-				output = irrigator.Read ();
-
-				Console.WriteLine (output);
-				Console.WriteLine ("");
-
-				Console.WriteLine("");
-				Console.WriteLine("Checking the output...");
-				Console.WriteLine("");
-
-				var data = ParseOutputLine(GetLastDataLine(output));
-
-				Console.WriteLine ("");
-				Console.WriteLine ("Checking pump burst on time value");
-
-				Assert.IsTrue(data.ContainsKey("B"));
-
-				var newPumpBurstOnTimeValue = Convert.ToInt32(data["B"]);
-
-				Console.WriteLine("Pump burst on time: " + newPumpBurstOnTimeValue);
-
-				// If the pumpBurstOnTime was specified in the command then the output should be exact
-				if (pumpBurstOnTime > 0)
-					Assert.AreEqual(pumpBurstOnTime, newPumpBurstOnTimeValue, "Invalid pump burst on time: " + newPumpBurstOnTimeValue);
-				else // Otherwise going by the simulated soil moisture sensor theres a small margin of error
-				{
-					var pumpBurstOnTimeIsWithinRange = IsWithinRange (pumpBurstOnTime, newPumpBurstOnTimeValue, 3);
-
-					Assert.IsTrue (pumpBurstOnTimeIsWithinRange, "Invalid pump burst on time: " + newPumpBurstOnTimeValue);
-
-				}
-
-			} catch (IOException ex) {
-				Console.WriteLine (ex.ToString ());
-				Assert.Fail ();
-			} finally {
-				if (irrigator != null)
-					irrigator.Close ();
-
-				if (soilMoistureSimulator != null)
-					soilMoistureSimulator.Disconnect ();
+				helper.TestPumpBurstOnTimeCommand();
 			}
 		}
 	}

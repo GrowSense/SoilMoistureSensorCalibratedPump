@@ -9,11 +9,28 @@ using System.Linq;
 
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-	[TestFixture(Category="Integration")]
+	[TestFixture(Category = "Integration")]
 	public class ReadIntervalCommandTestFixture : BaseTestFixture
 	{
 		[Test]
-		public void Test_SetReadIntervalCommand()
+		public void Test_SetReadIntervalCommand_1Second()
+		{
+			using (var helper = new ReadIntervalCommandTestHelper())
+			{
+				helper.ReadInterval = 1;
+
+				helper.DevicePort = GetDevicePort();
+				helper.DeviceBaudRate = GetSerialBaudRate();
+
+				helper.SimulatorPort = GetSimulatorPort();
+				helper.SimulatorBaudRate = GetSerialBaudRate();
+
+				helper.TestSetReadIntervalCommand();
+			}
+		}
+
+		[Test]
+		public void Test_SetReadIntervalCommand_5Seconds()
 		{
 			using (var helper = new ReadIntervalCommandTestHelper())
 			{
