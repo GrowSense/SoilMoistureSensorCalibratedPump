@@ -7,12 +7,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
 	public class BaseTestFixture
 	{
-		public int PwmHigh = 255;
-		public int AnalogHigh = 1023;
-		
-		public bool CalibrationIsReversedByDefault = true; // Reversed by default to matches common soil moisture sensors
-		
-		public BaseTestFixture ()
+		public bool CalibrationIsReversedByDefault = true;
+
+		public BaseTestFixture()
 		{
 		}
 
@@ -28,25 +25,25 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public string GetDevicePort()
 		{
-			var devicePort = Environment.GetEnvironmentVariable ("IRRIGATOR_PORT");
-			
+			var devicePort = Environment.GetEnvironmentVariable("IRRIGATOR_PORT");
+
 			if (String.IsNullOrEmpty(devicePort))
 				devicePort = "/dev/ttyUSB0";
-			
-			Console.WriteLine ("Device port: " + devicePort);
-			
+
+			Console.WriteLine("Device port: " + devicePort);
+
 			return devicePort;
 		}
 
 		public string GetSimulatorPort()
 		{
-			var simulatorPort = Environment.GetEnvironmentVariable ("IRRIGATOR_SIMULATOR_PORT");
-			
+			var simulatorPort = Environment.GetEnvironmentVariable("IRRIGATOR_SIMULATOR_PORT");
+
 			if (String.IsNullOrEmpty(simulatorPort))
 				simulatorPort = "/dev/ttyUSB1";
-			
-			Console.WriteLine ("Simulator port: " + simulatorPort);
-			
+
+			Console.WriteLine("Simulator port: " + simulatorPort);
+
 			return simulatorPort;
 		}
 
@@ -61,35 +58,38 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			Console.WriteLine("Expected value: " + expectedValue);
 			Console.WriteLine("Actual value: " + actualValue);
 			Console.WriteLine("Allowable margin of error: " + allowableMarginOfError);
-			
-			var minAllowableValue = expectedValue-allowableMarginOfError;
+
+			var minAllowableValue = expectedValue - allowableMarginOfError;
 			if (minAllowableValue < 0)
 				minAllowableValue = 0;
-			var maxAllowableValue = expectedValue+allowableMarginOfError;
-			
+			var maxAllowableValue = expectedValue + allowableMarginOfError;
+
 			Console.WriteLine("Max allowable value: " + maxAllowableValue);
 			Console.WriteLine("Min allowable value: " + minAllowableValue);
-			
+
 			var isWithinRange = actualValue <= maxAllowableValue &&
 				actualValue >= minAllowableValue;
-		
+
 			Console.WriteLine("Is within range: " + isWithinRange);
-		
+
 			return isWithinRange;
 		}
 
 		public Dictionary<string, string> ParseOutputLine(string outputLine)
 		{
-			var dictionary = new Dictionary<string, string> ();
+			var dictionary = new Dictionary<string, string>();
 
-			if (IsValidOutputLine (outputLine)) {
-				foreach (var pair in outputLine.Split(';')) {
-					var parts = pair.Split (':');
+			if (IsValidOutputLine(outputLine))
+			{
+				foreach (var pair in outputLine.Split(';'))
+				{
+					var parts = pair.Split(':');
 
-					if (parts.Length == 2) {
-						var key = parts [0];
-						var value = parts [1];
-						dictionary [key] = value;
+					if (parts.Length == 2)
+					{
+						var key = parts[0];
+						var value = parts[1];
+						dictionary[key] = value;
 					}
 				}
 			}
@@ -99,10 +99,11 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public string GetLastDataLine(string output)
 		{
-			var lines = output.Split ('\n');
+			var lines = output.Split('\n');
 
-			for (int i = lines.Length - 1; i >= 0; i--) {
-				var line = lines [i].Trim();
+			for (int i = lines.Length - 1; i >= 0; i--)
+			{
+				var line = lines[i].Trim();
 				if (IsValidOutputLine(line))
 					return line;
 			}

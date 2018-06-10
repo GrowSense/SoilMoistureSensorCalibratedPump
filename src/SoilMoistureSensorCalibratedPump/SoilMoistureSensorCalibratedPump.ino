@@ -13,22 +13,20 @@
 
 int serialMode = SERIAL_MODE_CSV;
 
-long loopNumber = 0;
-
 void setup()
 {
   Serial.begin(9600);
 
-  if (isDebugMode)
+/*  if (isDebugMode)
   {
     Serial.println("Starting irrigator");
-  }
+  }*/
 
   setupSoilMoistureSensor();
 
   setupIrrigation();
 
-  serialOutputInterval = soilMoistureSensorReadingInterval;
+  serialOutputIntervalInSeconds = soilMoistureSensorReadingIntervalInSeconds;
 
 }
 
@@ -39,13 +37,7 @@ void loop()
 
   loopNumber++;
 
-  if (isDebugMode)
-  {
-    Serial.println("==============================");
-    Serial.print("===== Start Loop: ");
-    Serial.println(loopNumber);
-    Serial.println("==============================");
-  }
+  serialPrintLoopHeader();
 
   checkCommand();
 
@@ -55,15 +47,7 @@ void loop()
 
   irrigateIfNeeded();
 
-  if (isDebugMode)
-  {
-    Serial.println("==============================");
-    Serial.print("===== End Loop: ");
-    Serial.println(loopNumber);
-    Serial.println("==============================");
-    Serial.println("");
-    Serial.println("");
-  }
+  serialPrintLoopFooter();
 
   delay(1);
 }
@@ -84,7 +68,7 @@ void checkCommand()
 
     int length = strlen(msg);
 
-//    Serial.print("Received message: ");
+    Serial.print("Received message: ");
     Serial.println(msg);
 
     switch (letter)
@@ -152,7 +136,7 @@ void restoreDefaultSettings()
 /* Serial Output */
 void serialPrintData()
 {
-  bool isTimeToPrintData = lastSerialOutputTime + secondsToMilliseconds(serialOutputInterval) < millis()
+  bool isTimeToPrintData = lastSerialOutputTime + secondsToMilliseconds(serialOutputIntervalInSeconds) < millis()
       || lastSerialOutputTime == 0;
 
   bool isReadyToPrintData = isTimeToPrintData && soilMoistureSensorReadingHasBeenTaken;
@@ -180,7 +164,7 @@ void serialPrintData()
       Serial.print(pumpStatus);
       Serial.print(";");
       Serial.print("V:");
-      Serial.print(soilMoistureSensorReadingInterval);
+      Serial.print(soilMoistureSensorReadingIntervalInSeconds);
       Serial.print(";");
       Serial.print("B:");
       Serial.print(pumpBurstOnTime);
@@ -249,15 +233,36 @@ void serialPrintData()
       Serial.println();
     }*/
 
-    if (isDebugMode)
+/*    if (isDebugMode)
     {
       Serial.print("Last pump start time:");
       Serial.println(pumpStartTime);
       Serial.print("Last pump finish time:");
       Serial.println(lastPumpFinishTime);
-    }
+    }*/
 
     lastSerialOutputTime = millis();
   }
+/*  else
+  {
+    if (isDebugMode)
+    {    
+      Serial.println("Not ready to serial print data");
+
+      Serial.print("  Is time to serial print data: ");
+      Serial.println(isTimeToPrintData);
+      if (!isTimeToPrintData)
+      {
+        Serial.print("    Time remaining before printing data: ");
+        Serial.print(millisecondsToSecondsWithDecimal(lastSerialOutputTime + secondsToMilliseconds(serialOutputIntervalInSeconds) - millis()));
+        Serial.println(" seconds");
+      }
+      Serial.print("  Soil moisture sensor reading has been taken: ");
+      Serial.println(soilMoistureSensorReadingHasBeenTaken);
+      Serial.print("  Is ready to print data: ");
+      Serial.println(isReadyToPrintData);
+
+    }
+  }*/
 }
 
