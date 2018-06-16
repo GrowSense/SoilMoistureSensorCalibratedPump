@@ -22,7 +22,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		public string SimulatorPort;
 		public int SimulatorBaudRate = 0;
 
-		public int DelayAfterConnectingToHardware = 1500;
+		public int DelayAfterConnectingToHardware = 500;
 
 		public string DataPrefix = "D;";
 		public string DataPostFix = ";;";
@@ -133,6 +133,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		public void WaitForDevicesToEnable()
 		{
 			Thread.Sleep(DelayAfterConnectingToHardware);
+
+			WaitForText(DataPrefix);
 		}
 
 		public void HandleConnectionIOException(string deviceLabel, string devicePort, int deviceBaudRate, Exception exception)
