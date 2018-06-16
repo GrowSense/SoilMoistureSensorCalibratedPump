@@ -12,7 +12,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public int RawValueMarginOfError = 18;
 		public int CalibratedValueMarginOfError = 3;
-		public double TimeErrorMargin = 0.2;
+		public double TimeErrorMargin = 0.3;
 
 		public bool CalibrationIsReversedByDefault = true;
 
