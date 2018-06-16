@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using NUnit.Framework;
 using duinocom;
 using System.Threading;
@@ -21,10 +21,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.Threshold = 15;
 
 				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetSerialBaudRate();
+				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
 
 				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSerialBaudRate();
+				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
 
 				helper.TestThresholdCommand();
 			}
@@ -38,10 +38,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.Threshold = 25;
 
 				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetSerialBaudRate();
+				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
 
 				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSerialBaudRate();
+				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
 
 				helper.TestThresholdCommand();
 			}
@@ -58,10 +58,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.Threshold = value;
 
 				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetSerialBaudRate();
+				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
 
 				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSerialBaudRate();
+				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
 
 				helper.TestThresholdCommand();
 			}
@@ -78,10 +78,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.Threshold = value;
 
 				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetSerialBaudRate();
+				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
 
 				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSerialBaudRate();
+				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
 
 				helper.TestThresholdCommand();
 			}

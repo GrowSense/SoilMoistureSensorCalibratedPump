@@ -21,10 +21,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.PumpBurstOnTime = 1;
 
 				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetSerialBaudRate();
+				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
 
 				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSerialBaudRate();
+				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
 
 				helper.TestPumpBurstOnTimeCommand();
 			}
@@ -38,10 +38,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.PumpBurstOnTime = 5;
 
 				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetSerialBaudRate();
+				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
 
 				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSerialBaudRate();
+				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
 
 				helper.TestPumpBurstOnTimeCommand();
 			}
