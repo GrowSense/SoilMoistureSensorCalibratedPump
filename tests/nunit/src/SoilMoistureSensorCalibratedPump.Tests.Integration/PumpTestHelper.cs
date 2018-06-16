@@ -65,12 +65,12 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public void CheckPumpIsOff()
 		{
-			AssertSimulatorPinForDuration("pump", SoilMoistureSensorSimulatorPumpPin, false, DurationToCheckPump);
+			AssertSimulatorPinForDuration("pump", SimulatorPumpPin, false, DurationToCheckPump);
 		}
 
 		public void CheckPumpIsOn()
 		{
-			AssertSimulatorPinForDuration("pump", SoilMoistureSensorSimulatorPumpPin, true, DurationToCheckPump);
+			AssertSimulatorPinForDuration("pump", SimulatorPumpPin, true, DurationToCheckPump);
 		}
 
 		public void CheckPumpIsAuto()
@@ -88,22 +88,22 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				else
 				{
 					// Wait for the pump to turn on for the first time
-					WaitUntilSimulatorPinIs("pump", SoilMoistureSensorSimulatorPumpPin, true);
+					WaitUntilSimulatorPinIs("pump", SimulatorPumpPin, true);
 
 					// Check on time     
-					var timeOn = WaitWhileSimulatorPinIs("pump", SoilMoistureSensorSimulatorPumpPin, true);
+					var timeOn = WaitWhileSimulatorPinIs("pump", SimulatorPumpPin, true);
 					AssertIsWithinRange("pump", BurstOnTime, timeOn, TimeErrorMargin);
 
 					// Check off time
-					var timeOff = WaitWhileSimulatorPinIs("pump", SoilMoistureSensorSimulatorPumpPin, false);
+					var timeOff = WaitWhileSimulatorPinIs("pump", SimulatorPumpPin, false);
 					AssertIsWithinRange("pump", BurstOffTime, timeOff, TimeErrorMargin);
 
 					// Check on time
-					timeOn = WaitWhileSimulatorPinIs("pump", SoilMoistureSensorSimulatorPumpPin, true);
+					timeOn = WaitWhileSimulatorPinIs("pump", SimulatorPumpPin, true);
 					AssertIsWithinRange("pump", BurstOnTime, timeOn, TimeErrorMargin);
 
 					// Check off time
-					timeOff = WaitWhileSimulatorPinIs("pump", SoilMoistureSensorSimulatorPumpPin, false);
+					timeOff = WaitWhileSimulatorPinIs("pump", SimulatorPumpPin, false);
 					AssertIsWithinRange("pump", BurstOffTime, timeOff, TimeErrorMargin);
 				}
 			}

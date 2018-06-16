@@ -34,7 +34,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			WriteParagraphTitleText("Reading the value of the soil moisture sensor pump pin...");
 
-			var pumpPinValue = SimulatorDigitalRead(SoilMoistureSensorSimulatorPumpPin);
+			var pumpPinValue = SimulatorDigitalRead(SimulatorPumpPin);
 
 			Console.WriteLine("Pump pin value: " + GetOnOffString(pumpPinValue));
 
