@@ -61,6 +61,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 				helper.TestCalibrateCommand();
 			}
 		}
+
 		[Test]
 		public void Test_CalibrateDryToSpecifiedValueCommand_220()
 		{
