@@ -75,9 +75,13 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public void CheckPumpIsAuto()
 		{
-			if (SimulatedSoilMoisturePercentage < Threshold)
+			var waterIsNeeded = SimulatedSoilMoisturePercentage < Threshold;
+
+			if (waterIsNeeded)
 			{
-				if (BurstOffTime == 0)
+				var pumpStaysOn = BurstOffTime == 0;
+
+				if (pumpStaysOn)
 				{
 					CheckPumpIsOn();
 				}
