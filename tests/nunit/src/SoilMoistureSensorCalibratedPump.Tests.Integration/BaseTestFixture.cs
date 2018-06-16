@@ -63,7 +63,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public int GetSimulatorSerialBaudRate()
 		{
-			var baudRateString = Environment.GetEnvironmentVariable ("IRRIGATOR_ESP_SIMULATOR_BAUD_RATE");
+			var baudRateString = Environment.GetEnvironmentVariable ("IRRIGATOR_SIMULATOR_BAUD_RATE");
 			
 			var baudRate = 0;
 			
