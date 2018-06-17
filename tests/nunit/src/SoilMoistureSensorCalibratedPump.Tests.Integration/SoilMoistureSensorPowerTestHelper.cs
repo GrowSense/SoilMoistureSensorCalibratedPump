@@ -54,6 +54,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			WaitUntilSoilMoistureSensorPowerPinIs(On);
 			WaitUntilSoilMoistureSensorPowerPinIs(Off);
+			WaitUntilSoilMoistureSensorPowerPinIs(On);
 
 			CheckSoilMoistureSensorOnDuration();
 			CheckSoilMoistureSensorOffDuration();
@@ -80,7 +81,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			WriteParagraphTitleText("Checking the total off time is correct...");
 
-			var expectedOffTime = ReadInterval;
+			var expectedOffTime = ReadInterval - DelayAfterTurningSoilMoistureSensorOn;
 
 			AssertIsWithinRange("total off time", expectedOffTime, totalOffTime, TimeErrorMargin);
 		}
