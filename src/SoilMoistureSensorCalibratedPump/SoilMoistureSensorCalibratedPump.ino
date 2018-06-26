@@ -210,7 +210,7 @@ void serialPrintData()
       Serial.print(pumpStatus);
       Serial.print("&");
       Serial.print("readingInterval=");
-      Serial.print(soilMoistureSensorReadingInterval);
+      Serial.print(soilMoistureSensorReadingIntervalInSeconds);
       Serial.print("&");
       Serial.print("pumpBurstOnTime=");
       Serial.print(pumpBurstOnTime);
