@@ -87,6 +87,7 @@ void checkCommand()
         break;
       case 'V':
         setSoilMoistureSensorReadingInterval(msg);
+        break;
       case 'B':
         setPumpBurstOnTime(msg);
         break;
