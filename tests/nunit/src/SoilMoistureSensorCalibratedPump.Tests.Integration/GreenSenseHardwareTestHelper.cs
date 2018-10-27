@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using NUnit.Framework;
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
@@ -10,7 +10,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public int DelayAfterTurningSoilMoistureSensorOn = 3;
 
-		public int RawValueMarginOfError = 18;
+		public int RawValueMarginOfError = 25;
 		public int CalibratedValueMarginOfError = 3;
 		public double TimeErrorMargin = 0.3;
 
