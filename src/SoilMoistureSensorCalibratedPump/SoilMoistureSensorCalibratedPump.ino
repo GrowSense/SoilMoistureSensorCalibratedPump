@@ -9,7 +9,7 @@
 #define SERIAL_MODE_CSV 1
 #define SERIAL_MODE_QUERYSTRING 2
 
-#define VERSION "1-0-0-0"
+#define VERSION "1-0-0-52"
 
 int serialMode = SERIAL_MODE_CSV;
 
@@ -17,10 +17,7 @@ void setup()
 {
   Serial.begin(9600);
 
-/*  if (isDebugMode)
-  {
-    Serial.println("Starting irrigator");
-  }*/
+  Serial.println("Starting irrigator");
 
   setupSoilMoistureSensor();
 
@@ -266,4 +263,3 @@ void serialPrintData()
     }
   }*/
 }
-

@@ -21,9 +21,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		}
 
 		#region Enable Devices Functions
-		public override void EnableDevices(bool enableSimulator)
+		public override void ConnectDevices(bool enableSimulator)
 		{
-			base.EnableDevices(enableSimulator);
+			base.ConnectDevices(enableSimulator);
 
 			PrepareDeviceForTest();
 		}

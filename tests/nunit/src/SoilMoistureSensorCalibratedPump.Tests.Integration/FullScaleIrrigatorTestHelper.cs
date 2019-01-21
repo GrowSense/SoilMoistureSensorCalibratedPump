@@ -15,7 +15,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		{
 			WriteTitleText("Starting full scale test");
 
-			EnableDevices();
+			ConnectDevices();
 
 			int soilMoisturePercentage = 30;
 

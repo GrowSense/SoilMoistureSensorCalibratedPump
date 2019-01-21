@@ -12,7 +12,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			Console.WriteLine("Pump command: " + PumpCommand);
 			Console.WriteLine("");
 
-			EnableDevices(false);
+			ConnectDevices(false);
 
 			var cmd = "P" + (int)PumpCommand;
 

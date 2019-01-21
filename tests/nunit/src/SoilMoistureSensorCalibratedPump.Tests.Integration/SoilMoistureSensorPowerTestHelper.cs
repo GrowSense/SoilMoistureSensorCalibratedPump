@@ -11,7 +11,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		{
 			WriteTitleText("Starting soil moisture sensor power test");
 
-			EnableDevices();
+			ConnectDevices();
 
 			SetDeviceReadInterval(ReadInterval);
 

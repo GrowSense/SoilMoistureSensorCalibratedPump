@@ -15,7 +15,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			Console.WriteLine("Read interval: " + ReadInterval);
 
-			EnableDevices(false);
+			ConnectDevices(false);
 
 			SetDeviceReadInterval(ReadInterval);
 
