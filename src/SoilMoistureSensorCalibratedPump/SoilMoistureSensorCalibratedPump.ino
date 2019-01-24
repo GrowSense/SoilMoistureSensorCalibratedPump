@@ -82,7 +82,7 @@ void checkCommand()
       case 'W':
         setWetSoilMoistureCalibrationValue(msg);
         break;
-      case 'V':
+      case 'I':
         setSoilMoistureSensorReadingInterval(msg);
         break;
       case 'B':
@@ -161,7 +161,7 @@ void serialPrintData()
       Serial.print("P:");
       Serial.print(pumpStatus);
       Serial.print(";");
-      Serial.print("V:");
+      Serial.print("I:");
       Serial.print(soilMoistureSensorReadingIntervalInSeconds);
       Serial.print(";");
       Serial.print("B:");

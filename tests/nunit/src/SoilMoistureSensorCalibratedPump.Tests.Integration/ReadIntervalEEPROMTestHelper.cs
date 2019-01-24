@@ -23,12 +23,12 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			var dataEntry = WaitForDataEntry ();
 
-			AssertDataValueEquals(dataEntry, "V", ReadInterval);
+			AssertDataValueEquals(dataEntry, "I", ReadInterval);
 		}
 
 		public void SendReadIntervalCommand()
 		{
-			var command = "V" + ReadInterval;
+			var command = "I" + ReadInterval;
 
 			WriteParagraphTitleText("Sending read interval command...");
 
@@ -38,7 +38,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			WriteParagraphTitleText("Checking read interval value...");
 
-			AssertDataValueEquals(dataEntry, "V", ReadInterval);
+			AssertDataValueEquals(dataEntry, "I", ReadInterval);
 		}
 	}
 }

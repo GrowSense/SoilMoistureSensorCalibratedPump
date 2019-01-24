@@ -247,7 +247,7 @@ void setThresholdIsSetEEPROMFlag()
 {
   if (isDebugMode)
   {
-    Serial.print("Setting EEPROM 'threshold is set flag'");
+    Serial.println("Setting EEPROM 'threshold is set' flag");
   }
 
   if (EEPROM.read(thresholdIsSetEEPROMFlagAddress) != 99)

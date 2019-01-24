@@ -12,7 +12,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public int RawValueMarginOfError = 25;
 		public int CalibratedValueMarginOfError = 3;
-		public double TimeErrorMargin = 0.3;
+		public double TimeErrorMargin = 0.4;
 
 		public bool CalibrationIsReversedByDefault = true;
 
@@ -108,7 +108,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 		public void SetDeviceReadInterval(int numberOfSeconds)
 		{
-			var cmd = "V" + numberOfSeconds;
+			var cmd = "I" + numberOfSeconds;
 
 			Console.WriteLine("");
 			Console.WriteLine("Setting device read interval to " + numberOfSeconds + " second(s)...");

@@ -17,7 +17,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			var data = WaitForDataEntry();
 
-			AssertDataValueEquals(data, "V", ReadInterval);
+			AssertDataValueEquals(data, "I", ReadInterval);
 
 			var sensorDoesTurnOff = ReadInterval > DelayAfterTurningSoilMoistureSensorOn;
 

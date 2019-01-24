@@ -22,12 +22,13 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		public string SimulatorPort;
 		public int SimulatorBaudRate = 0;
 
-		public int DelayAfterConnectingToHardware = 500;
+		public int DelayAfterConnectingToHardware = 2 * 1000;
+		public int DelayAfterDisconnectingFromHardware = 1 * 1000;
 
 		public string DataPrefix = "D;";
 		public string DataPostFix = ";;";
 
-		public int TimeoutWaitingForResponse = 20;
+		public int TimeoutWaitingForResponse = 20 * 1000;
 
 		public int AnalogPinMaxValue = 1023;
 
@@ -39,6 +40,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		public int ResetTriggerPin = 4;
 
 		public string IrrigatorStartText = "Starting irrigator";
+
+		public TimeoutHelper Timeout = new TimeoutHelper();
 
 		public HardwareTestHelper()
 		{
@@ -156,6 +159,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			Thread.Sleep(DelayAfterConnectingToHardware);
 
 			WaitForText(DataPrefix);
+
+			ReadFromDeviceAndOutputToConsole();
 		}
 
 		public void HandleConnectionIOException(string deviceLabel, string devicePort, int deviceBaudRate, Exception exception)
@@ -169,7 +174,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		}
 		#endregion
 
-		#region Write to Device Functions
+		#region Reset Functions
 		public virtual void ResetDeviceViaPin()
 		{
 			// Close the connection to the device
@@ -233,9 +238,12 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 		#region Console Write Functions
 		public void ConsoleWriteSerialOutput(string output)
 		{
-			Console.WriteLine("---------- Serial Output From Device -----------");
-			Console.WriteLine(output);
-			Console.WriteLine("------------------------------------------------");
+			if (!String.IsNullOrEmpty(output))
+			{
+				Console.WriteLine("----- Serial Output From Device");
+				Console.WriteLine(output);
+				Console.WriteLine("-------------------------------");
+			}
 		}
 		#endregion
 
@@ -278,7 +286,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 			var output = String.Empty;
 			var containsText = false;
 
-			var startTime = DateTime.Now;
+			Timeout.Start();
 
 			while (!containsText)
 			{
@@ -290,14 +298,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 					containsText = true;
 				}
-
-				var hasTimedOut = DateTime.Now.Subtract(startTime).TotalSeconds > TimeoutWaitingForResponse;
-				if (hasTimedOut && !containsText)
-				{
-					ConsoleWriteSerialOutput(output);
-
-					Assert.Fail("Timed out waiting for text (" + TimeoutWaitingForResponse + " seconds)");
-				}
+				else
+					Timeout.Check(TimeoutWaitingForResponse, "Timed out waiting for text: " + text);
 			}
 
 			return output;
@@ -313,6 +315,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			var startTime = DateTime.Now;
 
+			Timeout.Start();
+
 			while (!containsData)
 			{
 				output += ReadLineFromDevice();
@@ -327,13 +331,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 					containsData = true;
 					dataLine = lastLine;
 				}
-
-				var hasTimedOut = DateTime.Now.Subtract(startTime).TotalSeconds > TimeoutWaitingForResponse;
-				if (hasTimedOut && !containsData)
+				else
 				{
-					ConsoleWriteSerialOutput(output);
-
-					Assert.Fail("Timed out waiting for data (" + TimeoutWaitingForResponse + " seconds)");
+					Timeout.Check(TimeoutWaitingForResponse, "Timed out waiting for data");
 				}
 			}
 
@@ -398,8 +398,11 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 			var startTime = DateTime.Now;
 
+			Timeout.Start();
+
 			while (powerPinValue != expectedValue)
 			{
+				Timeout.Check(TimeoutWaitingForResponse, "Timed out waiting for simulator pin to switch to " + GetOnOffString(expectedValue));
 				Console.Write(".");
 				powerPinValue = SimulatorDigitalRead(simulatorDigitalPin);
 			}
@@ -599,6 +602,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
 					if (SimulatorClient != null)
 						SimulatorClient.Disconnect();
+
+					Thread.Sleep(DelayAfterDisconnectingFromHardware);
 				}
 
 				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
