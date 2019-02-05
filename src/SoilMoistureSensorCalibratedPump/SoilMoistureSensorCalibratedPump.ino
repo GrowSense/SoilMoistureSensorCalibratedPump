@@ -9,7 +9,7 @@
 #define SERIAL_MODE_CSV 1
 #define SERIAL_MODE_QUERYSTRING 2
 
-#define VERSION "1-0-0-54"
+#define VERSION "1-0-0-55"
 
 int serialMode = SERIAL_MODE_CSV;
 
@@ -151,41 +151,27 @@ void serialPrintData()
       Serial.print("D;"); // This prefix indicates that the line contains data.
       Serial.print("R:");
       Serial.print(soilMoistureLevelRaw);
-      Serial.print(";");
-      Serial.print("C:");
+      Serial.print(";C:");
       Serial.print(soilMoistureLevelCalibrated);
-      Serial.print(";");
-      Serial.print("T:");
+      Serial.print(";T:");
       Serial.print(threshold);
-      Serial.print(";");
-      Serial.print("P:");
+      Serial.print(";P:");
       Serial.print(pumpStatus);
-      Serial.print(";");
-      Serial.print("I:");
+      Serial.print(";I:");
       Serial.print(soilMoistureSensorReadingIntervalInSeconds);
-      Serial.print(";");
-      Serial.print("B:");
+      Serial.print(";B:");
       Serial.print(pumpBurstOnTime);
-      Serial.print(";");
-      Serial.print("O:");
+      Serial.print(";O:");
       Serial.print(pumpBurstOffTime);
-      Serial.print(";");
-      Serial.print("WN:"); // Water needed
+      Serial.print(";WN:"); // Water needed
       Serial.print(soilMoistureLevelCalibrated < threshold);
-      Serial.print(";");
-      Serial.print("PO:"); // Pump on
+      Serial.print(";PO:"); // Pump on
       Serial.print(pumpIsOn);
-      Serial.print(";");
-      //Serial.print("SSPO:"); // Seconds since pump on
-      //Serial.print((millis() - lastPumpFinishTime) / 1000);
-      //Serial.print(";");
-      Serial.print("D:"); // Dry calibration value
+      Serial.print(";D:"); // Dry calibration value
       Serial.print(drySoilMoistureCalibrationValue);
-      Serial.print(";");
-      Serial.print("W:"); // Wet calibration value
+      Serial.print(";W:"); // Wet calibration value
       Serial.print(wetSoilMoistureCalibrationValue);
-      Serial.print(";");
-      Serial.print("Z:");
+      Serial.print(";Z:");
       Serial.print(VERSION);
       Serial.print(";;");
       Serial.println();

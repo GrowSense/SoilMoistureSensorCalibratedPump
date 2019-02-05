@@ -170,7 +170,7 @@ void takeSoilMoistureSensorReading()
   }
   else
   {
-    if (isDebugMode)
+    /*if (isDebugMode)
     {
       Serial.println("Sensor reading is not due");
       
@@ -186,7 +186,7 @@ void takeSoilMoistureSensorReading()
       Serial.print("  Time left until next soil moisture sensor reading: ");
       Serial.print(millisecondsToSecondsWithDecimal(timeLeftUntilNextReading));
       Serial.println(" seconds");
-    }
+    }*/
   }
 }
 
