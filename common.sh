@@ -1,17 +1,14 @@
 GARDEN_HOSTNAME=garden
 GARDEN_USER=j
 
-IRRIGATOR_PORT="/dev/ttyUSB0"
-SIMULATOR_PORT="/dev/ttyUSB1"
+# Get environmental variables
+IRRIGATOR_PORT=$IRRIGATOR_PORT
+SIMULATOR_PORT=$IRRIGATOR_SIMULATOR_PORT
 
-# If multiple devices are detected then this becomes the second device pair
-if pio device list | grep -q 'ttyUSB1'; then
-  IRRIGATOR_PORT="/dev/ttyUSB1"
+if [ ! "IRRIGATOR_PORT" ]; then
+  IRRIGATOR_PORT="/dev/ttyUSB0"
 fi
-
-# If multiple devices pairs are detected then this becomes the second device pair
-if pio device list | grep -q 'ttyUSB2'; then
-  IRRIGATOR_PORT="/dev/ttyUSB2"
-  SIMULATOR_PORT="/dev/ttyUSB3"
+if [ ! "SIMULATOR_PORT" ]; then
+  SIMULATOR_PORT="/dev/ttyUSB1"
 fi
 
