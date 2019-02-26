@@ -22,8 +22,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public string SimulatorPort;
         public int SimulatorBaudRate = 0;
       
-        public int DelayAfterConnectingToHardware = 2 * 1000;
-        public int DelayAfterDisconnectingFromHardware = 1 * 1000;
+        public int DelayAfterConnectingToHardware = 500;
+        public int DelayAfterDisconnectingFromHardware = 500;
 
         public string DataPrefix = "D;";
         public string DataPostFix = ";;";
@@ -135,7 +135,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             
             Console.WriteLine ("");
         }
-        
+
         public void EnsureSimulatorIsNotResettingDevice ()
         {
             // Set the reset trigger pin to INPUT_PULLUP mode to avoid resetting the device
@@ -545,7 +545,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             Console.WriteLine ("  Min allowable value: " + minAllowableValue);
 
             var isWithinRange = actualValue <= maxAllowableValue &&
-                       actualValue >= minAllowableValue;
+                                actualValue >= minAllowableValue;
 
             Console.WriteLine ("Is within range: " + isWithinRange);
 
