@@ -20,11 +20,14 @@ long lastSoilMoistureSensorReadingTime = 0; // Milliseconds
 int soilMoistureLevelCalibrated = 0;
 int soilMoistureLevelRaw = 0;
 
-bool reverseSoilMoistureSensor = false;
+//int sensorOffset = 0; // This is the offset for the resistive sensors
+int sensorOffset = 600; // This is the offset for the capacitive sensors
+
+bool reverseSoilMoistureSensor = true;
 //int drySoilMoistureCalibrationValue = ANALOG_MAX;
-int drySoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? 0 : ANALOG_MAX);
+int drySoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? sensorOffset : ANALOG_MAX);
 //int wetSoilMoistureCalibrationValue = 0;
-int wetSoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? ANALOG_MAX : 0);
+int wetSoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? ANALOG_MAX : sensorOffset);
 
 #define soilMoistureSensorIsCalibratedFlagAddress 1
 #define drySoilMoistureCalibrationValueAddress 2
@@ -478,8 +481,8 @@ void restoreDefaultCalibrationSettings()
 {
   removeEEPROMIsCalibratedFlag();
 
-  drySoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? 0 : ANALOG_MAX);
-  wetSoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? ANALOG_MAX : 0);
+  drySoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? sensorOffset : ANALOG_MAX);
+  wetSoilMoistureCalibrationValue = (reverseSoilMoistureSensor ? ANALOG_MAX : sensorOffset);
 
   setDrySoilMoistureCalibrationValue(drySoilMoistureCalibrationValue);
   setWetSoilMoistureCalibrationValue(wetSoilMoistureCalibrationValue);
