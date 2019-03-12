@@ -22,9 +22,11 @@ void setup()
   Serial.println("");
   Serial.println("Family: GreenSense");
   Serial.println("Group: irrigator");
-  Serial.println("Project: SoilMoistureSensorCalibratedSerial");
+  Serial.println("Project: SoilMoistureSensorCalibratedPump");
   Serial.print("Board: ");
   Serial.println(BOARD_TYPE);
+  Serial.print("Version: ");
+  Serial.println(VERSION);
   Serial.println("");
 
   setupSoilMoistureSensor();
