@@ -1,15 +1,13 @@
 pipeline {
     agent any
-    triggers {
-       pollSCM('*/30 * * * *')
-    }
     options {
         disableConcurrentBuilds();
+        skipDefaultCheckout true
     }
     stages {
         stage('CleanWS') {
             steps {
-                cleanWs()
+                deleteDir()
             }
         }
         stage('Checkout') {
@@ -28,7 +26,7 @@ pipeline {
         stage('Prepare') {
             when { expression { !shouldSkipBuild() } }
             steps {
-                sh 'echo "Prepare script skipped" #sh prepare.sh'
+                sh 'sh prepare.sh'
             }
         }
         stage('Init') {
