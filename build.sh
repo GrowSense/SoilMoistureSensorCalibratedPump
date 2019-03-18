@@ -1,3 +1,1 @@
-#!/bin/bash
-
-pio run
+sh build-sketch.sh

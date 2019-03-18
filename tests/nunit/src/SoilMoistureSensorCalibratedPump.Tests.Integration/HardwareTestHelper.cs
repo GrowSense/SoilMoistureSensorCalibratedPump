@@ -556,9 +556,26 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         #region Simulator Pin Assert Functions
 
+        public void AssertSimulatorPin (string label, int simulatorDigitalPin, bool expectedValue)
+        {
+            Console.WriteLine ("Checking " + label + " pin...");
+            Console.WriteLine ("  Expected value: " + expectedValue);
+
+            bool powerPinValue = SimulatorDigitalRead (simulatorDigitalPin);
+
+            if (expectedValue)
+                Assert.AreEqual (true, powerPinValue, "The " + label + " pin is off when it should be on.");
+            else
+                Assert.AreEqual (false, powerPinValue, "The " + label + " pin is on when it should be off.");
+
+            Console.WriteLine ("");
+            Console.WriteLine ("The " + label + " pin works as expected.");
+            Console.WriteLine ("");
+        }
+
         public void AssertSimulatorPinForDuration (string label, int simulatorDigitalPin, bool expectedValue, int durationInSeconds)
         {
-            Console.WriteLine ("Checking soil " + label + " pin for specified duration...");
+            Console.WriteLine ("Checking " + label + " pin for specified duration...");
             Console.WriteLine ("  Expected value: " + expectedValue);
             Console.WriteLine ("  Duration: " + durationInSeconds);
 
