@@ -70,8 +70,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public void WaitForMessageReceived (string message)
         {
             Console.WriteLine ("");
-            Console.WriteLine ("Waiting for received message");
-            Console.WriteLine ("  Message: " + message);
+            Console.WriteLine ("Waiting for message to be received: " + message);
 
             var output = String.Empty;
             var wasMessageReceived = false;
@@ -85,7 +84,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                 if (output.Contains (expectedText)) {
                     wasMessageReceived = true;
 
-                    Console.WriteLine ("  Message was received");
+                    //Console.WriteLine ("  Message was received");
 
                     ConsoleWriteSerialOutput (output);
                 }

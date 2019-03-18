@@ -346,7 +346,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public string WaitForDataLine ()
         {
-            Console.WriteLine ("Waiting for data line");
+            Console.WriteLine ("Waiting for a line of data");
 
             var dataLine = String.Empty;
             var output = String.Empty;
@@ -362,8 +362,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                 var lastLine = GetLastLine (output);
 
                 if (IsValidDataLine (lastLine)) {
-                    Console.WriteLine ("  Found valid data line");
-                    Console.WriteLine ("    " + lastLine);
+                    //Console.WriteLine ("  Found valid data line");
+                    //Console.WriteLine ("    " + lastLine);
 
                     containsData = true;
                     dataLine = lastLine;
