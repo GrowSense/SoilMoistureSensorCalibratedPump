@@ -86,7 +86,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
                     //Console.WriteLine ("  Message was received");
 
-                    ConsoleWriteSerialOutput (output);
+                    //ConsoleWriteSerialOutput (output);
                 }
 
                 var hasTimedOut = DateTime.Now.Subtract (startTime).TotalSeconds > TimeoutWaitingForResponse;

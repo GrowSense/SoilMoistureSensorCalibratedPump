@@ -274,12 +274,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public void ConsoleWriteSerialOutput (string output)
         {
             if (!String.IsNullOrEmpty (output)) {
-                foreach (var line in output.Split('\r')) {
-                    //if (!String.IsNullOrEmpty (line)) {
-                    //Console.WriteLine ("----- Serial Output From Device");
-                    Console.WriteLine ("> " + line);
-                    //Console.WriteLine ("-----");
-                    //}
+                foreach (var line in output.Trim().Split('\r')) {
+                    if (!String.IsNullOrEmpty (line)) {
+                        Console.WriteLine ("> " + line);
+                    }
                 }
             }
         
@@ -334,7 +332,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                 output += ReadLineFromDevice ();
 
                 if (output.Contains (text)) {
-                    Console.WriteLine ("  Found text: " + text);
+                    //Console.WriteLine ("  Found text: " + text);
 
                     containsText = true;
                 } else
@@ -645,7 +643,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         {
             if (!disposedValue) {
                 if (disposing) {
-                    ConsoleWriteSerialOutput (FullDeviceOutput);
+                    if (!TestContext.CurrentContext.Result.State == TestState.Success) {
+                        Console.WriteLine ("Complete device serial output...");
+                        ConsoleWriteSerialOutput (FullDeviceOutput);
+                    }
 
                     if (DeviceClient != null)
                         DeviceClient.Close ();
