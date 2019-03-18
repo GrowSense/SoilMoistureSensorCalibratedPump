@@ -6,6 +6,6 @@ pio run -s && \
 
 echo "Finished building sketch." || \
 
-echo "Failed building sketch."
+(echo "Failed building sketch." && exit 1)
 
 

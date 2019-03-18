@@ -7,4 +7,4 @@ xbuild src/SoilMoistureSensorCalibratedPump.sln /p:Configuration=Release /verbos
 
 echo "Finished building project tests." ||
 
-echo "Failed building project tests!"
+(echo "Failed building project tests!" && exit 1)
