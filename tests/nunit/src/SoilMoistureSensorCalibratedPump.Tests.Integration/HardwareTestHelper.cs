@@ -643,7 +643,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         {
             if (!disposedValue) {
                 if (disposing) {
-                    if (!TestContext.CurrentContext.Result.State == TestState.Success) {
+                    if (TestContext.CurrentContext.Result.State != TestState.Success) {
                         Console.WriteLine ("Complete device serial output...");
                         ConsoleWriteSerialOutput (FullDeviceOutput);
                     }
