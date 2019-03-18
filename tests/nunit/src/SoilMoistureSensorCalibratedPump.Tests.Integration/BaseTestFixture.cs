@@ -40,7 +40,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
             if (TestContext.CurrentContext.Result.State == TestState.Error
                 || TestContext.CurrentContext.Result.State == TestState.Failure) {
-                Console.WriteLine ("Test failed.");
+                Console.WriteLine ("Test failed!");
 
                 Console.WriteLine (failuresDir);
                 Console.WriteLine (fixtureName);
