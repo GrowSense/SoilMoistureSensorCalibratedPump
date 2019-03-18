@@ -55,7 +55,7 @@ pipeline {
         stage('Upload simulator') {
             when { expression { !shouldSkipBuild() } }
             steps {
-                sh 'sh upload-simulator.sh ${IRRIGATOR_SIMULATOR_PORT}'
+                sh 'echo "Simulator sketch upload skipped" #sh upload-simulator.sh ${IRRIGATOR_SIMULATOR_PORT}'
             }
         }
         stage('Test') {
