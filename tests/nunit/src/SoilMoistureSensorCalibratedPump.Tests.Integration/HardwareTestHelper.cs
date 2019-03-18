@@ -51,14 +51,14 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void WriteTitleText (string titleText)
         {
-            Console.WriteLine ("========================================");
+            Console.WriteLine ("==========");
             Console.WriteLine (titleText);
             Console.WriteLine ("");
         }
 
         public void WriteSubTitleText (string subTitleText)
         {
-            Console.WriteLine ("----------------------------------------");
+            Console.WriteLine ("----------");
             Console.WriteLine (subTitleText);
             Console.WriteLine ("");
         }
@@ -242,9 +242,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void ReadFromDeviceAndOutputToConsole ()
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Reading the output from the device...");
-            Console.WriteLine ("");
+            //Console.WriteLine ("");
+            //Console.WriteLine ("Reading the output from the device...");
+            //Console.WriteLine ("");
 
             // Read the output
             var output = DeviceClient.Read ();
@@ -257,7 +257,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public string ReadLineFromSimulator ()
         {
-            Console.WriteLine ("Reading a line of the output from the simulator...");
+            //Console.WriteLine ("Reading a line of the output from the simulator...");
 
             // Read the output
             var output = SimulatorClient.Client.ReadLine ();
@@ -274,10 +274,15 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public void ConsoleWriteSerialOutput (string output)
         {
             if (!String.IsNullOrEmpty (output)) {
-                Console.WriteLine ("----- Serial Output From Device");
-                Console.WriteLine (output);
-                Console.WriteLine ("-------------------------------");
+                foreach (var line in output.Split('\n')) {
+                    //if (!String.IsNullOrEmpty (line)) {
+                    //Console.WriteLine ("----- Serial Output From Device");
+                    Console.WriteLine ("> " + line);
+                    //Console.WriteLine ("-----");
+                    //}
+                }
             }
+        
         }
 
         #endregion
