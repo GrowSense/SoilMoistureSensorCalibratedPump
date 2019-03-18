@@ -229,7 +229,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public string ReadLineFromDevice ()
         {
-            Console.WriteLine ("Reading a line of the output from the device...");
+            //Console.WriteLine ("Reading a line of the output from the device...");
 
             // Read the output
             var output = DeviceClient.ReadLine ();
@@ -274,7 +274,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public void ConsoleWriteSerialOutput (string output)
         {
             if (!String.IsNullOrEmpty (output)) {
-                foreach (var line in output.Split('\n')) {
+                foreach (var line in output.Split('\r')) {
                     //if (!String.IsNullOrEmpty (line)) {
                     //Console.WriteLine ("----- Serial Output From Device");
                     Console.WriteLine ("> " + line);
