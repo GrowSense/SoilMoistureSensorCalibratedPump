@@ -25,6 +25,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public override void ConnectDevices (bool enableSimulator)
         {
+            Console.WriteLine ("Connecting devices...");
+
             base.ConnectDevices (enableSimulator);
 
             PrepareDeviceForTest ();
@@ -41,6 +43,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public virtual void PrepareDeviceForTest (bool consoleWriteDeviceOutput)
         {
+            Console.WriteLine ("Preparing device for test...");
+
             ResetDeviceSettings ();
 
             SetDeviceReadInterval (1);
@@ -70,7 +74,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public void WaitForMessageReceived (string message)
         {
             Console.WriteLine ("");
-            Console.WriteLine ("Waiting for message to be received: " + message);
+            Console.WriteLine ("Waiting for message: " + message);
 
             var output = String.Empty;
             var wasMessageReceived = false;

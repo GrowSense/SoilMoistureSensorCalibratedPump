@@ -195,7 +195,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             // Give the pin some time at LOW to ensure reset
             Thread.Sleep (10);
 
-            // Cancel the reset
+            // Change the reset trigger pin to an INPUT_PULLUP to cancel the reset
             SimulatorClient.PinMode (ResetTriggerPin, PinMode.INPUT_PULLUP);
 
             // Re-open the connection to the device
@@ -216,7 +216,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         #endregion
 
-        #region Write to Simultor Functions
+        #region Write to Simulator Functions
 
         public virtual void WriteToSimulator (string text)
         {
@@ -280,7 +280,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                     }
                 }
             }
-        
         }
 
         #endregion
@@ -360,9 +359,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                 var lastLine = GetLastLine (output);
 
                 if (IsValidDataLine (lastLine)) {
-                    //Console.WriteLine ("  Found valid data line");
-                    //Console.WriteLine ("    " + lastLine);
-
                     containsData = true;
                     dataLine = lastLine;
                 } else {
@@ -657,9 +653,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
                     Thread.Sleep (DelayAfterDisconnectingFromHardware);
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }

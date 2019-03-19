@@ -16,7 +16,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public virtual void Initialize ()
         {
             Console.WriteLine ("");
-            Console.WriteLine ("====================");
+            Console.WriteLine ("=====");
             Console.WriteLine ("Preparing test");
         }
 
@@ -26,7 +26,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             HandleFailureFile ();
 
             Console.WriteLine ("Finished test");
-            Console.WriteLine ("====================");
+            Console.WriteLine ("=====");
             Console.WriteLine ("");
         }
 
