@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./common.sh
+#. ./common.sh
 
 echo "Uploading simulator to port $SIMULATOR_PORT"
 
