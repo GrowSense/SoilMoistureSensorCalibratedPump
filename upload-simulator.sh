@@ -9,8 +9,6 @@ if [ ! $SIMULATOR_PORT ]; then
   exit 1
 fi
 
-DIR=$PWD
-
 echo "Uploading simulator to port $SIMULATOR_PORT"
 
 # Specify a temporary directory name
