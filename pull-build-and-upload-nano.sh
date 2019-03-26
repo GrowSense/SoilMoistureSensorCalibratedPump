@@ -15,10 +15,11 @@ echo "Port: $PORT_NAME"
 git checkout master && \
 git pull origin master && \
 sh inject-version.sh && \
+sh build-nano.sh && \
 sh upload-nano.sh $PORT_NAME && \
 
-# Revert the sketch file to avoid git merge conflicts
-git checkout src/SoilMoistureSensorCalibratedPump/SoilMoistureSensorCalibratedPump.ino && \
+# Clean avoid git merge conflicts
+sh clean.sh && \
 
 echo "Pull, build, and upload complete."
 
