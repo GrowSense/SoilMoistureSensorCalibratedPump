@@ -19,15 +19,8 @@ void setup()
   Serial.begin(9600);
 
   Serial.println("Starting irrigator");
-  Serial.println("");
-  Serial.println("Family: GreenSense");
-  Serial.println("Group: irrigator");
-  Serial.println("Project: SoilMoistureSensorCalibratedPump");
-  Serial.print("Board: ");
-  Serial.println(BOARD_TYPE);
-  Serial.print("Version: ");
-  Serial.println(VERSION);
-  Serial.println("");
+  
+  serialPrintDeviceInfo();
 
   setupSoilMoistureSensor();
 
@@ -59,6 +52,19 @@ void loop()
   delay(1);
 }
 
+void serialPrintDeviceInfo()
+{
+  Serial.println("");
+  Serial.println("Family: GreenSense");
+  Serial.println("Group: irrigator");
+  Serial.println("Project: SoilMoistureSensorCalibratedPump");
+  Serial.print("Board: ");
+  Serial.println(BOARD_TYPE);
+  Serial.print("Version: ");
+  Serial.println(VERSION);
+  Serial.println("");
+}
+
 /* Commands */
 void checkCommand()
 {
@@ -80,6 +86,9 @@ void checkCommand()
 
     switch (letter)
     {
+      case '#':
+        serialPrintDeviceInfo();
+        break;
       case 'P':
         setPumpStatus(msg);
         break;
