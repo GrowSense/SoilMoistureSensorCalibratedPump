@@ -96,7 +96,7 @@ void takeSoilMoistureSensorReading()
   
   	bool soilMoistureSensorIsOnAndReady = soilMoistureSensorIsOn && (postSensorOnDelayHasPast || !sensorGetsTurnedOff);
 
-    bool soilMoistureSensorIsOnButSettling = soilMoistureSensorIsOn && !postSensorOnDelayHasPast && sensorGetsTurnedOff;
+        bool soilMoistureSensorIsOnButSettling = soilMoistureSensorIsOn && !postSensorOnDelayHasPast && sensorGetsTurnedOff;
 
 /*    if (isDebugMode)
     {
@@ -445,7 +445,7 @@ int getWetSoilMoistureCalibrationValue()
 {
   int value = EEPROMReadLong(wetSoilMoistureCalibrationValueAddress);
 
-  if (value < 0
+  if (value <= 0
       || value > ANALOG_MAX)
     return wetSoilMoistureCalibrationValue;
   else
