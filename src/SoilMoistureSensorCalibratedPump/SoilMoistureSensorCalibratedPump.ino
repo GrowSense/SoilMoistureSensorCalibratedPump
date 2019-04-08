@@ -190,7 +190,7 @@ void serialPrintData()
       Serial.print(drySoilMoistureCalibrationValue);
       Serial.print(";W:"); // Wet calibration value
       Serial.print(wetSoilMoistureCalibrationValue);
-      Serial.print(";Z:");
+      Serial.print(";V:");
       Serial.print(VERSION);
       Serial.print(";;");
       Serial.println();
