@@ -2,11 +2,12 @@
 
 BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 
+echo "Graduating master branch to lts branch..."
+
 if [ "$BRANCH" = "dev" ];  then
+  echo "Currently in dev branch. Checking out master branch..."
   git checkout master || exit 1
 fi
-
-echo "Graduating master branch to lts branch"
 
 echo ""
 echo "Fetching other branches from origin..."
@@ -40,4 +41,5 @@ echo ""
 echo "Checking out the $BRANCH again..."
 git checkout $BRANCH && \
 
+echo ""
 echo "The 'master' branch has been graduated to the 'lts' branch"
