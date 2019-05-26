@@ -10,7 +10,7 @@ if [ "$BRANCH" = "dev" ];  then
 fi
 
 echo ""
-echo "Fetching other branches from origin..."
+echo "Fetching from origin..."
 git fetch origin && \
 
 echo ""
@@ -26,7 +26,7 @@ echo "Checking out the lts branch..."
 git checkout lts && \
 
 echo ""
-echo "Pulling the lts branch from origin to update it..."
+echo "Pulling the lts branch from origin (to update it locally)..."
 git pull origin lts && \
 
 echo ""
@@ -38,7 +38,7 @@ echo "Pushing the updated lts branch to origin..."
 git push origin lts && \
 
 echo ""
-echo "Checking out the $BRANCH again..."
+echo "Checking out the $BRANCH branch again..."
 git checkout $BRANCH && \
 
 echo ""
