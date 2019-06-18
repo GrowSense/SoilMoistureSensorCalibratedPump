@@ -1,67 +1,56 @@
-﻿using System;
-using NUnit.Framework;
-using duinocom;
-using System.Threading;
-using ArduinoSerialControllerClient;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.IO.Ports;
+﻿using NUnit.Framework;
 
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-	[TestFixture(Category = "Integration")]
-	public class PumpCommandTestFixture : BaseTestFixture
-	{
-		[Test]
-		public void Test_SetPumpToOn()
-		{
-			using (var helper = new PumpCommandTestHelper())
-			{
-				helper.PumpCommand = PumpStatus.On;
+    [TestFixture (Category = "Integration")]
+    public class PumpCommandTestFixture : BaseTestFixture
+    {
+        [Test]
+        public void Test_SetPumpToOn ()
+        {
+            using (var helper = new PumpCommandTestHelper ()) {
+                helper.PumpCommand = PumpMode.On;
 
-				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
+                helper.DevicePort = GetDevicePort ();
+                helper.DeviceBaudRate = GetDeviceSerialBaudRate ();
 
-				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
+                helper.SimulatorPort = GetSimulatorPort ();
+                helper.SimulatorBaudRate = GetSimulatorSerialBaudRate ();
 
-				helper.TestPumpCommand();
-			}
-		}
+                helper.TestPumpCommand ();
+            }
+        }
 
-		[Test]
-		public void Test_SetPumpToOff()
-		{
-			using (var helper = new PumpCommandTestHelper())
-			{
-				helper.PumpCommand = PumpStatus.Off;
+        [Test]
+        public void Test_SetPumpToOff ()
+        {
+            using (var helper = new PumpCommandTestHelper ()) {
+                helper.PumpCommand = PumpMode.Off;
 
-				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
+                helper.DevicePort = GetDevicePort ();
+                helper.DeviceBaudRate = GetDeviceSerialBaudRate ();
 
-				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
+                helper.SimulatorPort = GetSimulatorPort ();
+                helper.SimulatorBaudRate = GetSimulatorSerialBaudRate ();
 
-				helper.TestPumpCommand();
-			}
-		}
+                helper.TestPumpCommand ();
+            }
+        }
 
-		[Test]
-		public void Test_SetPumpToAuto()
-		{
-			using (var helper = new PumpCommandTestHelper())
-			{
-				helper.PumpCommand = PumpStatus.Auto;
+        [Test]
+        public void Test_SetPumpToAuto ()
+        {
+            using (var helper = new PumpCommandTestHelper ()) {
+                helper.PumpCommand = PumpMode.Auto;
 
-				helper.DevicePort = GetDevicePort();
-				helper.DeviceBaudRate = GetDeviceSerialBaudRate();
+                helper.DevicePort = GetDevicePort ();
+                helper.DeviceBaudRate = GetDeviceSerialBaudRate ();
 
-				helper.SimulatorPort = GetSimulatorPort();
-				helper.SimulatorBaudRate = GetSimulatorSerialBaudRate();
+                helper.SimulatorPort = GetSimulatorPort ();
+                helper.SimulatorBaudRate = GetSimulatorSerialBaudRate ();
 
-				helper.TestPumpCommand();
-			}
-		}
-	}
+                helper.TestPumpCommand ();
+            }
+        }
+    }
 }

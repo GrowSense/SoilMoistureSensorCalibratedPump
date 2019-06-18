@@ -51,14 +51,14 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void WriteTitleText (string titleText)
         {
-            Console.WriteLine ("==========");
+            Console.WriteLine ("===");
             Console.WriteLine (titleText);
             Console.WriteLine ("");
         }
 
         public void WriteSubTitleText (string subTitleText)
         {
-            Console.WriteLine ("----------");
+            Console.WriteLine ("---");
             Console.WriteLine (subTitleText);
             Console.WriteLine ("");
         }
@@ -276,7 +276,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             if (!String.IsNullOrEmpty (output)) {
                 foreach (var line in output.Trim().Split('\r')) {
                     if (!String.IsNullOrEmpty (line)) {
-                        Console.WriteLine ("> " + line);
+                        Console.WriteLine ("> " + line.Trim ());
                     }
                 }
             }
@@ -366,6 +366,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                 }
             }
 
+            var waitDuration = DateTime.Now.Subtract (Timeout.TimeoutStart);
+
+            Console.WriteLine ("  Wait duration: " + waitDuration.ToString ());
+
             return dataLine;
         }
 
@@ -388,9 +392,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
                 var lastLine = GetLastLine (output);
 
                 if (IsValidDataLine (lastLine)) {
-                    Console.WriteLine ("  Found valid data line");
-                    Console.WriteLine ("    " + lastLine);
-
                     containsData = true;
                     dataLine = lastLine;
                     timeInSeconds = DateTime.Now.Subtract (startTime).TotalSeconds;
@@ -546,7 +547,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             var isWithinRange = actualValue <= maxAllowableValue &&
                                 actualValue >= minAllowableValue;
 
-            Console.WriteLine ("Is within range: " + isWithinRange);
+            Console.WriteLine ("  Is within range: " + isWithinRange);
 
             return isWithinRange;
         }

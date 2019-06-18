@@ -1,26 +1,18 @@
 ﻿using System;
+
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-	public class PumpBurstOnTimeCommandTestHelper : GreenSenseIrrigatorHardwareTestHelper
-	{
-		public int PumpBurstOnTime = 1;
+    public class PumpBurstOnTimeCommandTestHelper : SerialCommandTestHelper
+    {
+        public int PumpBurstOnTime = 1;
 
-		public void TestPumpBurstOnTimeCommand()
-		{
-			WriteTitleText("Starting pump burst on time command test");
+        public void TestPumpBurstOnTimeCommand ()
+        {
+            Letter = "O";
+            Value = PumpBurstOnTime;
+            Label = "pump burst on time";
 
-			Console.WriteLine("Pump burst on time: " + PumpBurstOnTime);
-			Console.WriteLine("");
-
-			ConnectDevices(false);
-
-			var cmd = "B" + PumpBurstOnTime;
-
-			SendDeviceCommand(cmd);
-
-			var dataEntry = WaitForDataEntry();
-
-			AssertDataValueEquals(dataEntry, "B", PumpBurstOnTime);
-		}
-	}
+            TestCommand ();
+        }
+    }
 }

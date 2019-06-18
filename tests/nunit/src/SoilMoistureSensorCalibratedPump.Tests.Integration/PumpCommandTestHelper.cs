@@ -1,26 +1,19 @@
 ﻿using System;
+
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-	public class PumpCommandTestHelper : GreenSenseIrrigatorHardwareTestHelper
-	{
-		public PumpStatus PumpCommand = PumpStatus.Auto;
+    public class PumpCommandTestHelper : SerialCommandTestHelper
+    {
+        public PumpMode PumpCommand = PumpMode.Auto;
 
-		public void TestPumpCommand()
-		{
-			WriteTitleText("Starting pump command test");
+        public void TestPumpCommand ()
+        {
+            Letter = "P";
+            Value = (int)PumpCommand;
+            Label = "pump mode";
+            ValueIsSavedInEEPROM = false;
 
-			Console.WriteLine("Pump command: " + PumpCommand);
-			Console.WriteLine("");
-
-			ConnectDevices(false);
-
-			var cmd = "P" + (int)PumpCommand;
-
-			SendDeviceCommand(cmd);
-
-			var dataEntry = WaitForDataEntry();
-			dataEntry = WaitForDataEntry();
-			AssertDataValueEquals(dataEntry, "P", (int)PumpCommand);
-		}
-	}
+            TestCommand ();
+        }
+    }
 }
