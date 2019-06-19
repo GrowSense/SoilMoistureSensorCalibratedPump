@@ -41,6 +41,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public string IrrigatorStartText = "Starting irrigator";
 
+        public string DeviceOnlineText = "Online";
+
         public TimeoutHelper Timeout = new TimeoutHelper ();
 
         public HardwareTestHelper ()
@@ -163,7 +165,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         {
             Thread.Sleep (DelayAfterConnectingToHardware);
 
-            WaitForText (DataPrefix);
+            WaitForText (DeviceOnlineText);
 
             ReadFromDeviceAndOutputToConsole ();
         }
@@ -202,7 +204,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             ConnectDevice ();
 
             // Ensure the irrigator restarted
-            WaitForText (IrrigatorStartText);
+            WaitForDevicesToConnect ();
         }
 
         #endregion
