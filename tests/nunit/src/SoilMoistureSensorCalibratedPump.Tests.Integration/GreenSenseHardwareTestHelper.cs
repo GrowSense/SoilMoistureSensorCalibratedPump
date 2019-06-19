@@ -68,6 +68,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         {
             WriteToDevice (command);
 
+            Thread.Sleep (100);
+
             // TODO: Remove if not needed. Disabled to try speed up tests.
             //WaitForMessageReceived (command);
         }
