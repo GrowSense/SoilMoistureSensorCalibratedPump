@@ -57,8 +57,8 @@ void setupSoilMoistureSensor()
 /* Sensor On/Off */
 void turnSoilMoistureSensorOn()
 {
-  if (isDebugMode)
-    Serial.println("Turning sensor on");
+//  if (isDebugMode)
+//    Serial.println("Turning sensor on");
 
   digitalWrite(soilMoistureSensorPowerPin, HIGH);
 
@@ -69,8 +69,8 @@ void turnSoilMoistureSensorOn()
 
 void turnSoilMoistureSensorOff()
 {
-  if (isDebugMode)
-    Serial.println("Turning sensor off");
+//  if (isDebugMode)
+//    Serial.println("Turning sensor off");
 
   digitalWrite(soilMoistureSensorPowerPin, LOW);
 
@@ -85,8 +85,8 @@ void takeSoilMoistureSensorReading()
 
   if (sensorReadingIsDue)
   {
-    if (isDebugMode)
-      Serial.println("Sensor reading is due");
+//    if (isDebugMode)
+//      Serial.println("Sensor reading is due");
 
   	bool sensorGetsTurnedOff = secondsToMilliseconds(soilMoistureSensorReadingIntervalInSeconds) > delayAfterTurningSoilMoistureSensorOn;
   
@@ -141,13 +141,13 @@ void takeSoilMoistureSensorReading()
     else if (soilMoistureSensorIsOnButSettling)
     {
       // Skip this loop. Wait for the sensor to settle in before taking a reading.
-      if (isDebugMode)
-        Serial.println("Soil moisture sensor is settling after being turned on");
+//      if (isDebugMode)
+//        Serial.println("Soil moisture sensor is settling after being turned on");
     }
     else if (soilMoistureSensorIsOnAndReady)
     {
-      if (isDebugMode)
-        Serial.println("Preparing to take reading");
+//      if (isDebugMode)
+//        Serial.println("Preparing to take reading");
 
       lastSoilMoistureSensorReadingTime = millis();
       
@@ -173,8 +173,8 @@ void takeSoilMoistureSensorReading()
       }
     }
   }
-  else
-  {
+  //else
+  //{
     /*if (isDebugMode)
     {
       Serial.println("Sensor reading is not due");
@@ -192,7 +192,7 @@ void takeSoilMoistureSensorReading()
       Serial.print(millisecondsToSecondsWithDecimal(timeLeftUntilNextReading));
       Serial.println(" seconds");
     }*/
-  }
+  //}
 }
 
 double getAverageSoilMoistureSensorReading()
@@ -224,16 +224,16 @@ void setupSoilMoistureSensorReadingInterval()
 
   if (eepromIsSet)
   {
-    if (isDebugMode)
-    	Serial.println("EEPROM read interval value has been set. Loading.");
+//    if (isDebugMode)
+//    	Serial.println("EEPROM read interval value has been set. Loading.");
 
     soilMoistureSensorReadingIntervalInSeconds = getSoilMoistureSensorReadingInterval();
   }
-  else
-  {
-    if (isDebugMode)
-      Serial.println("EEPROM read interval value has not been set. Using defaults.");
-  }
+//  else
+//  {
+//    if (isDebugMode)
+//      Serial.println("EEPROM read interval value has not been set. Using defaults.");
+//  }
 }
 
 void setSoilMoistureSensorReadingInterval(char* msg)
@@ -245,11 +245,11 @@ void setSoilMoistureSensorReadingInterval(char* msg)
 
 void setSoilMoistureSensorReadingInterval(long newValue)
 {
-  if (isDebugMode)
-  {
-    Serial.print("Set sensor reading interval: ");
-    Serial.println(newValue);
-  }
+//  if (isDebugMode)
+//  {
+//    Serial.print("Set sensor reading interval: ");
+//    Serial.println(newValue);
+//  }
 
   EEPROMWriteLong(soilMoistureSensorReadingIntervalAddress, newValue);
 
@@ -272,11 +272,11 @@ long getSoilMoistureSensorReadingInterval()
     return soilMoistureSensorReadingIntervalInSeconds;
   else
   {
-    if (isDebugMode)
-    {
-      Serial.print("Read interval found in EEPROM: ");
-      Serial.println(value);
-    }
+//    if (isDebugMode)
+//    {
+//      Serial.print("Read interval found in EEPROM: ");
+//      Serial.println(value);
+//    }
 
     return value;
   }
@@ -300,16 +300,16 @@ void setupCalibrationValues()
 
   if (eepromIsSet)
   {
-    if (isDebugMode)
-    	Serial.println("EEPROM calibration values have been set. Loading.");
+//    if (isDebugMode)
+//    	Serial.println("EEPROM calibration values have been set. Loading.");
 
     drySoilMoistureCalibrationValue = getDrySoilMoistureCalibrationValue();
     wetSoilMoistureCalibrationValue = getWetSoilMoistureCalibrationValue();
   }
   else
   {
-    if (isDebugMode)
-      Serial.println("EEPROM calibration values have not been set. Using defaults.");
+//    if (isDebugMode)
+//      Serial.println("EEPROM calibration values have not been set. Using defaults.");
       
     if (soilMoistureSensorType == SOIL_MOISTURE_SENSOR_TYPE_CAPACITIVE)
     {
@@ -350,11 +350,11 @@ void setDrySoilMoistureCalibrationValueToCurrent()
 
 void setDrySoilMoistureCalibrationValue(int newValue)
 {
-  if (isDebugMode)
-  {
-    Serial.print("Setting dry soil moisture sensor calibration value: ");
-    Serial.println(newValue);
-  }
+//  if (isDebugMode)
+//  {
+//    Serial.print("Setting dry soil moisture sensor calibration value: ");
+//    Serial.println(newValue);
+//  }
 
   drySoilMoistureCalibrationValue = newValue;
   
@@ -389,11 +389,11 @@ void setWetSoilMoistureCalibrationValueToCurrent()
 
 void setWetSoilMoistureCalibrationValue(int newValue)
 {
-  if (isDebugMode)
-  {
-    Serial.print("Setting wet soil moisture sensor calibration value: ");
-    Serial.println(newValue);
-  }
+//  if (isDebugMode)
+//  {
+//    Serial.print("Setting wet soil moisture sensor calibration value: ");
+//    Serial.println(newValue);
+//  }
 
   wetSoilMoistureCalibrationValue = newValue;
 
@@ -404,8 +404,8 @@ void setWetSoilMoistureCalibrationValue(int newValue)
 
 void reverseSoilMoistureCalibrationValues()
 {
-  if (isDebugMode)
-    Serial.println("Reversing soil moisture sensor calibration values");
+//  if (isDebugMode)
+//    Serial.println("Reversing soil moisture sensor calibration values");
 
   int tmpValue = drySoilMoistureCalibrationValue;
 
@@ -431,11 +431,11 @@ int getDrySoilMoistureCalibrationValue()
   {
     int drySoilMoistureSensorValue = value;
   
-    if (isDebugMode)
-    {
-      Serial.print("Dry calibration value found in EEPROM: ");
-      Serial.println(drySoilMoistureSensorValue);
-    }
+//    if (isDebugMode)
+//    {
+//      Serial.print("Dry calibration value found in EEPROM: ");
+//      Serial.println(drySoilMoistureSensorValue);
+//    }
 
     return drySoilMoistureSensorValue;
   }
@@ -448,14 +448,14 @@ int getWetSoilMoistureCalibrationValue()
   if (value <= 0
       || value > ANALOG_MAX)
     return wetSoilMoistureCalibrationValue;
-  else
-  {
-    if (isDebugMode)
-    {
-      Serial.print("Wet calibration value found in EEPROM: ");
-      Serial.println(value);
-    }
-  }
+//  else
+//  {
+//    if (isDebugMode)
+//    {
+//      Serial.print("Wet calibration value found in EEPROM: ");
+//      Serial.println(value);
+//    }
+//  }
 
   return value;
 }

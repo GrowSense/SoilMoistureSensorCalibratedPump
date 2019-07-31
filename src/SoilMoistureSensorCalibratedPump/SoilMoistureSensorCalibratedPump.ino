@@ -6,13 +6,12 @@
 #include "SoilMoistureSensor.h"
 #include "Irrigation.h"
 
-#define SERIAL_MODE_CSV 1
-#define SERIAL_MODE_QUERYSTRING 2
+//#define SERIAL_MODE_CSV 1
+//#define SERIAL_MODE_QUERYSTRING 2
+//int serialMode = SERIAL_MODE_CSV;
 
 #define VERSION "1-0-0-1"
 #define BOARD_TYPE "uno"
-
-int serialMode = SERIAL_MODE_CSV;
 
 void setup()
 {
@@ -72,10 +71,10 @@ void serialPrintDeviceInfo()
 /* Commands */
 void checkCommand()
 {
-  if (isDebugMode)
-  {
-    Serial.println("Checking incoming serial commands");
-  }
+//  if (isDebugMode)
+//  {
+//    Serial.println("Checking incoming serial commands");
+//  }
 
   if (checkMsgReady())
   {
@@ -164,13 +163,8 @@ void serialPrintData()
 
   if (isReadyToPrintData)
   {
-    if (isDebugMode)
-    {
-      Serial.println("Printing serial data");
-    }
-
-    if (serialMode == SERIAL_MODE_CSV)
-    {
+//    if (serialMode == SERIAL_MODE_CSV)
+//    {
       Serial.print("D;"); // This prefix indicates that the line contains data.
       Serial.print("R:");
       Serial.print(soilMoistureLevelRaw);
@@ -198,7 +192,7 @@ void serialPrintData()
       Serial.print(VERSION);
       Serial.print(";;");
       Serial.println();
-    }
+//    }
     /*else
     {
       Serial.print("raw=");
