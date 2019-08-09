@@ -11,6 +11,8 @@ matrix:
         - sh build-sketch.sh
 
     - language: csharp
+      mono:
+        - latest
       before_script:
         - git checkout $TRAVIS_BRANCH
         - sh prepare-tests.sh
