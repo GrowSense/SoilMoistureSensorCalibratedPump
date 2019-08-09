@@ -70,6 +70,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void CheckPumpIsOn ()
         {
+            WaitUntilSimulatorPinIs ("pump", SimulatorPumpPin, On);
+
             AssertSimulatorPinForDuration ("pump", SimulatorPumpPin, true, DurationToCheckPump);
         }
 
