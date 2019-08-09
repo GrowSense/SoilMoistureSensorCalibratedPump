@@ -6,11 +6,11 @@
 const int ANALOG_MAX = 1023;
 
 long lastSerialOutputTime = 0;
-long serialOutputIntervalInSeconds = 1;
+long serialOutputIntervalInSeconds = 3;
 
 bool isDebugMode = false;
 
-int loopNumber = 0;
+long loopNumber = 0;
 
 void serialPrintLoopHeader()
 {
