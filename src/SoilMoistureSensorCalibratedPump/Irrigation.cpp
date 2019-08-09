@@ -116,7 +116,7 @@ void irrigateIfNeeded()
 
     if (pumpIsOn)
     {
-      if (pumpBurstFinished)
+      if (pumpBurstFinished || !waterIsNeeded)
       {
         if (isDebugMode)
           Serial.println("  Pump burst finished");
