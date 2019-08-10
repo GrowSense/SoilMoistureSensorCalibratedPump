@@ -80,7 +80,9 @@ void turnSoilMoistureSensorOff()
 /* Sensor Readings */
 void takeSoilMoistureSensorReading()
 {
-  bool sensorReadingIsDue = lastSoilMoistureSensorReadingTime + secondsToMilliseconds(soilMoistureSensorReadingIntervalInSeconds) < millis()
+  //bool sensorReadingIsDue = lastSoilMoistureSensorReadingTime + secondsToMilliseconds(soilMoistureSensorReadingIntervalInSeconds) < millis()
+  //  || lastSoilMoistureSensorReadingTime == 0;
+  bool sensorReadingIsDue = millis() - lastSoilMoistureSensorReadingTime >= secondsToMilliseconds(soilMoistureSensorReadingIntervalInSeconds)
     || lastSoilMoistureSensorReadingTime == 0;
 
   if (sensorReadingIsDue)
@@ -92,7 +94,7 @@ void takeSoilMoistureSensorReading()
   
   	bool sensorIsOffAndNeedsToBeTurnedOn = !soilMoistureSensorIsOn && sensorGetsTurnedOff;
   
-  	bool postSensorOnDelayHasPast = lastSensorOnTime + delayAfterTurningSoilMoistureSensorOn < millis();
+  	bool postSensorOnDelayHasPast = millis() - lastSensorOnTime > delayAfterTurningSoilMoistureSensorOn;
   
   	bool soilMoistureSensorIsOnAndReady = soilMoistureSensorIsOn && (postSensorOnDelayHasPast || !sensorGetsTurnedOff);
 
