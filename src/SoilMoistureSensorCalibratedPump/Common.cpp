@@ -5,7 +5,7 @@
 
 const int ANALOG_MAX = 1023;
 
-long lastSerialOutputTime = 0;
+unsigned long lastSerialOutputTime = 0;
 long serialOutputIntervalInSeconds = 3;
 
 bool isDebugMode = false;
@@ -65,7 +65,7 @@ long EEPROMReadLong(int address)
       return ((four << 0) & 0xFF) + ((three << 8) & 0xFFFF) + ((two << 16) & 0xFFFFFF) + ((one << 24) & 0xFFFFFFFF);
 }
 
-long secondsToMilliseconds(int seconds)
+unsigned long secondsToMilliseconds(int seconds)
 {
   return seconds * 1000;
 }
