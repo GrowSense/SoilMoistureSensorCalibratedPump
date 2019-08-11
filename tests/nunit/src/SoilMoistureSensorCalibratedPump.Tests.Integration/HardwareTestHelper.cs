@@ -22,8 +22,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public string SimulatorPort;
         public int SimulatorBaudRate = 0;
       
-        public int DelayAfterConnectingToHardware = 1000;
-        public int DelayAfterDisconnectingFromHardware = 1000;
+        public int DelayAfterConnectingToHardware = 200;
+        public int DelayAfterDisconnectingFromHardware = 200;
 
         public string DataPrefix = "D;";
         public string DataPostFix = ";;";
@@ -35,7 +35,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public bool On = true;
         public bool Off = false;
 
-        public string FullDeviceOutput;
+        public string FullDeviceOutput = "";
 
         public int ResetTriggerPin = 4;
 
@@ -327,19 +327,22 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             var output = String.Empty;
             var containsText = false;
 
-            Timeout.Start ();
+            if (FullDeviceOutput.Contains (text))
+                return FullDeviceOutput;
+            else {
+                Timeout.Start ();
 
-            while (!containsText) {
-                output += ReadLineFromDevice ();
+                while (!containsText) {
+                    output += ReadLineFromDevice ();
 
-                if (output.Contains (text)) {
-                    //Console.WriteLine ("  Found text: " + text);
+                    if (output.Contains (text)) {
+                        //Console.WriteLine ("  Found text: " + text);
 
-                    containsText = true;
-                } else
-                    Timeout.Check (TimeoutWaitingForResponse, "Timed out waiting for text: " + text);
+                        containsText = true;
+                    } else
+                        Timeout.Check (TimeoutWaitingForResponse, "Timed out waiting for text: " + text);
+                }
             }
-
             return output;
         }
 
