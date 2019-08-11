@@ -45,7 +45,7 @@ void setupSoilMoistureSensor()
 
   pinMode(soilMoistureSensorPowerPin, OUTPUT);
   
-  soilMoistureSensorGetsTurnedOff = secondsToMilliseconds(soilMoistureSensorReadingIntervalInSeconds) > delayAfterTurningSoilMoistureSensorOn;
+  soilMoistureSensorGetsTurnedOff = secondsToMilliseconds(soilMoistureSensorReadingIntervalInSeconds) >= delayAfterTurningSoilMoistureSensorOn;
 
   if (!soilMoistureSensorGetsTurnedOff)
   {
@@ -89,13 +89,13 @@ void takeSoilMoistureSensorReading()
 
   	bool sensorIsOffAndNeedsToBeTurnedOn = !soilMoistureSensorIsOn && soilMoistureSensorGetsTurnedOff;
   
-  	bool postSensorOnDelayHasPast = millis() - lastSensorOnTime > delayAfterTurningSoilMoistureSensorOn;
+  	bool postSensorOnDelayHasPast = millis() - lastSensorOnTime >= delayAfterTurningSoilMoistureSensorOn;
   
   	bool soilMoistureSensorIsOnAndReady = soilMoistureSensorIsOn && (postSensorOnDelayHasPast || !soilMoistureSensorGetsTurnedOff);
 
     bool soilMoistureSensorIsOnButSettling = soilMoistureSensorIsOn && !postSensorOnDelayHasPast && soilMoistureSensorGetsTurnedOff;
 
-/*    if (isDebugMode)
+    /*if (isDebugMode)
     {
         Serial.print("  Sensor is on: ");
         Serial.println(soilMoistureSensorIsOn);
@@ -143,8 +143,8 @@ void takeSoilMoistureSensorReading()
     }
     else if (soilMoistureSensorIsOnAndReady)
     {
-//      if (isDebugMode)
-//        Serial.println("Preparing to take reading");
+      if (isDebugMode)
+        Serial.println("Preparing to take reading");
 
       lastSoilMoistureSensorReadingTime = millis();
       
