@@ -10,7 +10,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
     public int PumpOffDecreaseValue = 5;
     public int SoilMoisturePercentageMaximum = 70;
     public int SoilMoisturePercentageMinimum = 20;
-    public int TotalCyclesToRun = 1000;
+    public int TotalCyclesToRun = 15;
 
     public void RunFullScaleTest ()
     {
