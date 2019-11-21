@@ -5,9 +5,9 @@
 
 #define PUMP_PIN 11
 
-#define PUMP_STATUS_OFF 0
-#define PUMP_STATUS_ON 1
-#define PUMP_STATUS_AUTO 2
+#define PUMP_MODE_OFF 0
+#define PUMP_MODE_ON 1
+#define PUMP_MODE_AUTO 2
 
 extern int threshold;
 extern bool pumpIsOn;
@@ -15,7 +15,7 @@ extern unsigned long pumpStartTime;
 extern unsigned long lastPumpFinishTime;
 extern long pumpBurstOnTime;
 extern long pumpBurstOffTime;
-extern int pumpStatus;
+extern int pumpMode;
 extern int thresholdIsSetEEPROMFlagAddress;
 extern int thresholdEEPROMAddress;
 extern int pumpBurstOnTimeIsSetEEPROMFlagAddress;
@@ -31,8 +31,8 @@ void irrigateIfNeeded();
 void pumpOn();
 void pumpOff();
 
-void setPumpStatus(char* msg);
-void setPumpStatus(int newStatus);
+void setPumpMode(char* msg);
+void setPumpMode(int newMode);
 
 void setThreshold(char* msg);
 void setThreshold(int newThreshold);

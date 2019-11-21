@@ -16,7 +16,7 @@ unsigned long lastPumpFinishTime = 0;
 long pumpBurstOnTime = 3;
 long pumpBurstOffTime = 5;
 
-int pumpStatus = PUMP_STATUS_AUTO;
+int pumpMode = PUMP_MODE_AUTO;
 
 #define thresholdIsSetEEPROMFlagAddress 20
 #define thresholdEEPROMAddress 21
@@ -107,7 +107,7 @@ void irrigateIfNeeded()
     Serial.println("Irrigating (if needed)");
   }
 
-  if (pumpStatus == PUMP_STATUS_AUTO)
+  if (pumpMode == PUMP_MODE_AUTO)
   {
     bool readingHasBeenTaken = lastSoilMoistureSensorReadingTime > 0;
     bool pumpBurstFinished = pumpBurstOffTime > 0 && millis() - pumpStartTime >= secondsToMilliseconds(pumpBurstOnTime);
@@ -130,7 +130,7 @@ void irrigateIfNeeded()
       pumpOn();
     }
   }
-  else if(pumpStatus == PUMP_STATUS_ON)
+  else if(pumpMode == PUMP_MODE_ON)
   {
     if (!pumpIsOn)
       pumpOn();
@@ -158,13 +158,13 @@ void pumpOff()
   lastPumpFinishTime = millis();
 }
 
-void setPumpStatus(char* msg)
+void setPumpMode(char* msg)
 {
   int length = strlen(msg);
 
   if (length != 2)
   {
-    Serial.println("Invalid pump status:");
+    Serial.println("Invalid pump mode:");
     printMsg(msg);
   }
   else
@@ -174,13 +174,13 @@ void setPumpStatus(char* msg)
 //    Serial.println("Value:");
 //    Serial.println(value);
 
-    setPumpStatus(value);
+    setPumpMode(value);
   }
 }
 
-void setPumpStatus(int newStatus)
+void setPumpMode(int newMode)
 {
-  pumpStatus = newStatus;
+  pumpMode = newMode;
 }
 
 void setThreshold(char* msg)

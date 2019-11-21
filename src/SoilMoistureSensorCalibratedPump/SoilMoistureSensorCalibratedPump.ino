@@ -83,7 +83,7 @@ void checkCommand()
         
     char letter = msg[0];
 
-    int length = strlen(msg);
+    //int length = strlen(msg);
 
     Serial.print("Received message: ");
     Serial.println(msg);
@@ -93,8 +93,8 @@ void checkCommand()
       case '#':
         serialPrintDeviceInfo();
         break;
-      case 'P':
-        setPumpStatus(msg);
+      case 'M':
+        setPumpMode(msg);
         break;
       case 'T':
         setThreshold(msg);
@@ -119,17 +119,17 @@ void checkCommand()
         break;
       case 'N':
         Serial.println("Turning pump on");
-        pumpStatus = PUMP_STATUS_ON;
+        pumpMode = PUMP_MODE_ON;
         pumpOn();
         break;
       case 'F':
         Serial.println("Turning pump off");
-        pumpStatus = PUMP_STATUS_OFF;
+        pumpMode = PUMP_MODE_OFF;
         pumpOff();
         break;
       case 'A':
         Serial.println("Turning pump to auto");
-        pumpStatus = PUMP_STATUS_AUTO;
+        pumpMode = PUMP_MODE_AUTO;
         irrigateIfNeeded();
         break;
       case 'Z':
@@ -173,8 +173,8 @@ void serialPrintData()
       Serial.print(soilMoistureLevelCalibrated);
       Serial.print(";T:");
       Serial.print(threshold);
-      Serial.print(";P:");
-      Serial.print(pumpStatus);
+      Serial.print(";M:");
+      Serial.print(pumpMode);
       Serial.print(";I:");
       Serial.print(soilMoistureSensorReadingIntervalInSeconds);
       Serial.print(";B:");
@@ -208,8 +208,8 @@ void serialPrintData()
       Serial.print("waterNeeded=");
       Serial.print(soilMoistureLevelCalibrated < threshold);
       Serial.print("&");
-      Serial.print("pumpStatus=");
-      Serial.print(pumpStatus);
+      Serial.print("pumpMode=");
+      Serial.print(pumpMode);
       Serial.print("&");
       Serial.print("readingInterval=");
       Serial.print(soilMoistureSensorReadingIntervalInSeconds);
