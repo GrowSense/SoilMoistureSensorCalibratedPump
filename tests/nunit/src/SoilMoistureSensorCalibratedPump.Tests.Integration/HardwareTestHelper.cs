@@ -185,7 +185,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
       // Re-open the connection to the device
       ConnectDevice ();
 
-      // Ensure the irrigator restarted
+      // Ensure the device restarted
       WaitForDevicesToConnect ();
     }
     #endregion
