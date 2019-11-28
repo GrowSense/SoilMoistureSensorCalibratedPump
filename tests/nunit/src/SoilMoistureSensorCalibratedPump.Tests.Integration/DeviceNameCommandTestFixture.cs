@@ -7,7 +7,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
   public class DeviceNameCommandTestFixture : BaseTestFixture
   {
     [Test]
-    public void Test_SetMqttDeviceNameCommand ()
+    public void Test_SetDeviceNameCommand ()
     {
       using (var helper = new SerialCommandTestHelper ()) {
         helper.Label = "Device name";

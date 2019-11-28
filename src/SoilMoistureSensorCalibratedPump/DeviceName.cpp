@@ -12,7 +12,7 @@ String deviceName = "";
 
 void setDeviceName(char* newName)
 {
-  Serial.print("Setting device name: ");
+  Serial.print("Device name: ");
   Serial.println(newName);
   
   deviceName = newName;
