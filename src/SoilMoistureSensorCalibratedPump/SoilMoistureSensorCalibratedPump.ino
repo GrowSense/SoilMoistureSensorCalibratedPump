@@ -15,6 +15,8 @@ void setup()
 
   Serial.println("Starting irrigator");
   
+  loadDeviceNameFromEEPROM();
+  
   serialPrintDeviceInfo();
 
   setupSoilMoistureSensor();
@@ -23,8 +25,6 @@ void setup()
 
   serialOutputIntervalInSeconds = soilMoistureSensorReadingIntervalInSeconds;
   
-  loadDeviceNameFromEEPROM();
-
   Serial.println("Online");
 }
 
