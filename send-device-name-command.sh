@@ -16,6 +16,6 @@ fi
 echo "  Device name: $DEVICE_NAME"
 echo "  Device port: $SERIAL_PORT"
 
-sh send-serial-command.sh "Name:$MQTT_DEVICE_NAME" $SERIAL_PORT
+sh send-serial-command.sh "Name:$DEVICE_NAME" $SERIAL_PORT
 
 echo "Finished sending device name command"
