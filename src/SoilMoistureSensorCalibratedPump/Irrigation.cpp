@@ -2,11 +2,12 @@
 
 #include <EEPROM.h>
 
-#include <duinocom.h>
+#include <duinocom2.h>
 
 #include "Common.h"
 #include "SoilMoistureSensor.h"
 #include "Irrigation.h"
+#include "EEPROMHelper.h"
 
 int threshold = 30;
 

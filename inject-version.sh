@@ -12,6 +12,6 @@ else
 fi
 
 echo "Version: $FULL_VERSION"
-SOURCE_FILE="src/SoilMoistureSensorCalibratedPump/SoilMoistureSensorCalibratedPump.ino"
+SOURCE_FILE="src/SoilMoistureSensorCalibratedPump/Common.h"
 
 sed -i "s/#define VERSION .*/#define VERSION \"$FULL_VERSION\"/" $SOURCE_FILE

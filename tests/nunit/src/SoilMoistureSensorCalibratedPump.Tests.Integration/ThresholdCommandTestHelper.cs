@@ -9,7 +9,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         public void TestThresholdCommand ()
         {
             Label = "threshold";
-            Letter = "T";
+            Key = "T";
             Value = Threshold;
 
             TestCommand ();

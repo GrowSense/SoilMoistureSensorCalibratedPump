@@ -8,7 +8,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void TestPumpBurstOffTimeCommand ()
         {
-            Letter = "O";
+            Key = "O";
             Value = PumpBurstOffTime;
             Label = "pump burst off time";
 

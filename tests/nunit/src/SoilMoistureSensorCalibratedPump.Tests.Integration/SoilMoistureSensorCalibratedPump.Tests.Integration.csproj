@@ -75,6 +75,7 @@
     <Compile Include="ThresholdToCurrentCommandTestHelper.cs" />
     <Compile Include="PumpModeCommandTestFixture.cs" />
     <Compile Include="PumpModeCommandTestHelper.cs" />
+    <Compile Include="DeviceNameCommandTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

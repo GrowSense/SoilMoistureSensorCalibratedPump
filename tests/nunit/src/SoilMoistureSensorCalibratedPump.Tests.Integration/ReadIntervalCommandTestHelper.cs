@@ -8,7 +8,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void TestSetReadIntervalCommand ()
         {
-            Letter = "I";
+            Key = "I";
             Value = ReadingInterval;
             Label = "reading interval";
 
