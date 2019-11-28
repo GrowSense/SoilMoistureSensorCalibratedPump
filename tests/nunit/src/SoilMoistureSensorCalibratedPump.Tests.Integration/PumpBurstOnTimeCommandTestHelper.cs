@@ -2,17 +2,17 @@
 
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-    public class PumpBurstOnTimeCommandTestHelper : SerialCommandTestHelper
+  public class PumpBurstOnTimeCommandTestHelper : SerialCommandTestHelper
+  {
+    public int PumpBurstOnTime = 1;
+
+    public void TestPumpBurstOnTimeCommand ()
     {
-        public int PumpBurstOnTime = 1;
+      Key = "O";
+      Value = PumpBurstOnTime.ToString ();
+      Label = "pump burst on time";
 
-        public void TestPumpBurstOnTimeCommand ()
-        {
-            Key = "O";
-            Value = PumpBurstOnTime;
-            Label = "pump burst on time";
-
-            TestCommand ();
-        }
+      TestCommand ();
     }
+  }
 }

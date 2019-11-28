@@ -13,6 +13,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
     public int CalibratedValueMarginOfError = 4;
     public double TimeErrorMargin = 0.4;
     public bool CalibrationIsReversedByDefault = true;
+    public bool RequiresResetSettings = true;
 
     public GrowSenseHardwareTestHelper ()
     {
@@ -37,16 +38,18 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
     {
       Console.WriteLine ("Preparing device for test...");
 
-      ResetDeviceSettings ();
+      if (RequiresResetSettings) {
+        ResetDeviceSettings ();
 
-      SetDeviceReadInterval (1);
+        SetDeviceReadInterval (1);
 
-      SetDryCalibrationValue (AnalogPinMaxValue);
+        SetDryCalibrationValue (AnalogPinMaxValue);
 
-      SetWetCalibrationValue (0);
+        SetWetCalibrationValue (0);
 
-      if (CalibrationIsReversedByDefault)
-        ReverseDeviceCalibration ();
+        if (CalibrationIsReversedByDefault)
+          ReverseDeviceCalibration ();
+      }
 
       if (consoleWriteDeviceOutput)
         ReadFromDeviceAndOutputToConsole ();

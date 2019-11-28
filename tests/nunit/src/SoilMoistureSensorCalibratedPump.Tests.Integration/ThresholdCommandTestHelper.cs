@@ -2,17 +2,17 @@
 
 namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
-    public class ThresholdCommandTestHelper : SerialCommandTestHelper
+  public class ThresholdCommandTestHelper : SerialCommandTestHelper
+  {
+    public int Threshold = 30;
+
+    public void TestThresholdCommand ()
     {
-        public int Threshold = 30;
+      Label = "threshold";
+      Key = "T";
+      Value = Threshold.ToString ();
 
-        public void TestThresholdCommand ()
-        {
-            Label = "threshold";
-            Key = "T";
-            Value = Threshold;
-
-            TestCommand ();
-        }
+      TestCommand ();
     }
+  }
 }

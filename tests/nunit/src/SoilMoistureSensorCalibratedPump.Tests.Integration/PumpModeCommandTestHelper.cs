@@ -8,8 +8,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
     public void TestPumpModeCommand ()
     {
-      Letter = "M";
-      Value = (int)PumpMode;
+      Key = "M";
+      Value = ((int)PumpMode).ToString ();
       Label = "pump mode";
       ValueIsSavedInEEPROM = false;
 

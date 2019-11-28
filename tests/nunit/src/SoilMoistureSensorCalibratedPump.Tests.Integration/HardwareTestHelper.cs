@@ -100,7 +100,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
             Console.WriteLine ("Enabling target hardware device...");
 
-            DeviceClient = new SerialClient (DevicePort, DeviceBaudRate);
+            if (DeviceClient == null) {
+                DeviceClient = new SerialClient (DevicePort, DeviceBaudRate);
+            }
 
             try {
                 DeviceClient.Open ();
@@ -146,7 +148,8 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void DisconnectDevice ()
         {
-            DeviceClient.Close ();
+            if (DeviceClient != null)
+                DeviceClient.Close ();
         }
 
         public void DisconnectSimulator ()
@@ -327,9 +330,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             var output = String.Empty;
             var containsText = false;
 
-            if (FullDeviceOutput.Contains (text))
-                return FullDeviceOutput;
-            else {
+            if (!FullDeviceOutput.Contains (text)) {
                 Timeout.Start ();
 
                 while (!containsText) {
@@ -382,7 +383,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         {
             Console.WriteLine ("Waiting for data line");
 
-            var dataLine = String.Empty;
             var output = String.Empty;
             var containsData = false;
 
@@ -398,7 +398,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
                 if (IsValidDataLine (lastLine)) {
                     containsData = true;
-                    dataLine = lastLine;
                     timeInSeconds = DateTime.Now.Subtract (startTime).TotalSeconds;
                 } else
                     Timeout.Check (TimeoutWaitingForResponse, "Timed out waiting for data (" + TimeoutWaitingForResponse + " seconds)");
@@ -496,9 +495,14 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
         public void AssertDataValueEquals (Dictionary<string, string> dataEntry, string dataKey, int expectedValue)
         {
+            AssertDataValueEquals (dataEntry, dataKey, expectedValue.ToString ());
+        }
+
+        public void AssertDataValueEquals (Dictionary<string, string> dataEntry, string dataKey, string expectedValue)
+        {
             Assert.IsTrue (dataEntry.ContainsKey (dataKey), "The key '" + dataKey + "' is not found in the data entry.");
 
-            var value = Convert.ToInt32 (dataEntry [dataKey]);
+            var value = dataEntry [dataKey];
 
             Assert.AreEqual (expectedValue, value, "Data value for '" + dataKey + "' key is incorrect: " + value);
 
@@ -506,7 +510,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             Console.WriteLine ("");
         }
 
-        public void AssertDataValueIsWithinRange (Dictionary<string, string> dataEntry, string dataKey, int expectedValue, int allowableMarginOfError)
+        public virtual void AssertDataValueIsWithinRange (Dictionary<string, string> dataEntry, string dataKey, int expectedValue, int allowableMarginOfError)
         {
             var value = Convert.ToInt32 (dataEntry [dataKey]);
 
@@ -527,6 +531,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
             var minValue = expectedValue - allowableMarginOfError;
             var maxValue = expectedValue + allowableMarginOfError;
+
+            if (minValue < 0)
+                minValue = 0;
 
             Assert.IsTrue (isWithinRange, "The " + label + " value is outside the specified range: " + actualValue + " (Expected: " + minValue + " - " + maxValue + ")");
 

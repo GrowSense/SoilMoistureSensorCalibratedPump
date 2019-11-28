@@ -13,12 +13,11 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
         helper.Label = "Device name";
         helper.Value = "device" + new Random ().Next (100).ToString ();
         helper.Key = "Name";
-        // TODO: Remove if not needed
-        /*helper.ValueIsOutputAsData = false;
+        helper.ValueIsOutputAsData = false;
         helper.ValueIsOutputAsData = false;
         helper.RequiresResetSettings = false;
         helper.SeparateKeyValueWithColon = true;
-        helper.CheckExpectedSerialOutput = true;*/
+        helper.CheckExpectedSerialOutput = true;
 
         helper.DevicePort = GetDevicePort ();
         helper.DeviceBaudRate = GetDeviceSerialBaudRate ();
