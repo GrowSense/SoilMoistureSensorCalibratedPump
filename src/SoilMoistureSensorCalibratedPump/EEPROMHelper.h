@@ -10,9 +10,6 @@ long EEPROMReadLong(int address);
 void EEPROMWriteChars(int address, char* value); 
 void EEPROMWriteCharsAndSetFlag(int flagAddress, int address, char* value); 
 
-void EEPROMWriteString(int address, String value); 
-void EEPROMWriteStringAndSetFlag(int flagAddress, int address, String value); 
-
 String EEPROMReadString(int address);
 String EEPROMReadStringIfSet(int flagAddress, int valueAddress, char* defaultValue);
 
