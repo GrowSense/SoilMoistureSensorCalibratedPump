@@ -60,36 +60,11 @@ void EEPROMWriteChars(int address, char* data)
   EEPROM.write(address+length,'\0');   //Add termination null character for String Data
 }
 
-/*void EEPROMWriteString(int address, String data)
-{
-  //Serial.println("Writing char array to eeprom...");
-  //Serial.print("Length:");
-  //Serial.println(length);
-  int length = data.length;
-  int i;
-  for(i=0;i<length;i++)
-  {
-    //Serial.println("Writing char to eeprom...");
-    //Serial.print("Address:");
-    //Serial.println(address+i);
-    //Serial.print("Char:");
-    //Serial.println(data[i]);
-    EEPROM.write(address+i,data[i]);
-  }
-  EEPROM.write(address+length,'\0');   //Add termination null character for String Data
-}*/
-
 void EEPROMWriteCharsAndSetFlag(int flagAddress, int address, char* data)
 {
   EEPROMSetFlag(flagAddress);
   EEPROMWriteChars(address, data);
 }
-
-/*void EEPROMWriteStringAndSetFlag(int flagAddress, int address, String data)
-{
-  EEPROMSetFlag(flagAddress);
-  EEPROMWriteString(address, data);
-}*/
  
 String EEPROMReadString(int address)
 {
