@@ -12,6 +12,10 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
     public int RawValueMarginOfError = 42;
     public int CalibratedValueMarginOfError = 8;
     public double TimeErrorMargin = 0.4;
+    // Offset to take into account voltage drop via the simulated soil moisture sensor readings
+    public int ExpectedRawValueOffset = 10;
+    // Offset to take into account voltage drop via the simulated soil moisture sensor readings
+    public int ExpectedCalibratedValueOffset = 2;
     public bool CalibrationIsReversedByDefault = true;
     public bool RequiresResetSettings = true;
 
@@ -68,30 +72,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
       Console.WriteLine ("");
       Console.WriteLine ("Waiting for message: " + message);
 
-      var output = String.Empty;
-      var wasMessageReceived = false;
-
-      var startTime = DateTime.Now;
-
-      while (!wasMessageReceived) {
-        output += ReadLineFromDevice ();
-
-        var expectedText = "Received message: " + message;
-        if (output.Contains (expectedText)) {
-          wasMessageReceived = true;
-
-          //Console.WriteLine ("  Message was received");
-
-          //ConsoleWriteSerialOutput (output);
-        }
-
-        var hasTimedOut = DateTime.Now.Subtract (startTime).TotalSeconds > TimeoutWaitingForResponse;
-        if (hasTimedOut && !wasMessageReceived) {
-          ConsoleWriteSerialOutput (output);
-
-          Assert.Fail ("Timed out waiting for message received (" + TimeoutWaitingForResponse + " seconds)");
-        }
-      }
+      WaitForText ("Received message: " + message);
     }
     #endregion
     #region Specific Device Command Functions
@@ -101,6 +82,18 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
       Console.WriteLine ("");
       Console.WriteLine ("Resetting device default settings...");
+      Console.WriteLine ("  Sending '" + cmd + "' command to device");
+      Console.WriteLine ("");
+
+      SendDeviceCommand (cmd);
+    }
+
+    public void SetDeviceReadInterval (int numberOfSeconds)
+    {
+      var cmd = "I" + numberOfSeconds;
+
+      Console.WriteLine ("");
+      Console.WriteLine ("Setting device read interval to " + numberOfSeconds + " second(s)...");
       Console.WriteLine ("  Sending '" + cmd + "' command to device");
       Console.WriteLine ("");
 
@@ -131,17 +124,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
       SendDeviceCommand (cmd);
     }
 
-    public void SetDeviceReadInterval (int numberOfSeconds)
-    {
-      var cmd = "I" + numberOfSeconds;
-
-      Console.WriteLine ("");
-      Console.WriteLine ("Setting device read interval to " + numberOfSeconds + " second(s)...");
-      Console.WriteLine ("  Sending '" + cmd + "' command to device");
-      Console.WriteLine ("");
-
-      SendDeviceCommand (cmd);
-    }
 
     public void ReverseDeviceCalibration ()
     {
@@ -179,10 +161,39 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
       return WaitWhileSimulatorPinIs ("soil moisture sensor power", SoilMoistureSimulatorPowerPin, expectedValue);
     }
     #endregion
+    #region Assert Value Functions
+    public override void AssertDataValueIsWithinRange (System.Collections.Generic.Dictionary<string, string> dataEntry, string dataKey, int expectedValue, int allowableMarginOfError)
+    {
+      if (dataKey == "C")
+        expectedValue = ApplyOffset (expectedValue, ExpectedCalibratedValueOffset);
+
+      if (dataKey == "R")
+        expectedValue = ApplyOffset (expectedValue, ExpectedRawValueOffset);
+
+      base.AssertDataValueIsWithinRange (dataEntry, dataKey, expectedValue, allowableMarginOfError);
+    }
+    #endregion
     #region Assert Simulator Pin Functions
     public void AssertSoilMoistureSensorPowerPinForDuration (bool expectedValue, int durationInSeconds)
     {
       AssertSimulatorPinForDuration ("soil moisture sensor power", SoilMoistureSimulatorPowerPin, expectedValue, durationInSeconds);
+    }
+    #endregion
+    #region Apply Offset Functions
+    public int ApplyOffset (int value, int offset)
+    {
+      Console.WriteLine ("Applying offset...");
+      Console.WriteLine ("  Value: " + value);
+      Console.WriteLine ("  Offset: " + offset);
+      var newValue = value + offset;
+
+      if (newValue < 0)
+        newValue = 0;
+
+      Console.WriteLine ("  New value: " + newValue);
+      Console.WriteLine ("Finished applying offset.");
+
+      return newValue;
     }
     #endregion
   }

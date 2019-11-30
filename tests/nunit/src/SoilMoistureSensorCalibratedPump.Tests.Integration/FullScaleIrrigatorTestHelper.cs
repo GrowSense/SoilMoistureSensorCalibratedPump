@@ -41,9 +41,9 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
       WriteParagraphTitleText ("Getting data to check that values are correct...");
 
-      var data = WaitForData (3); // Wait for 3 entries to allow the simulator to stabilise
+      WaitForData (3); // Wait for 3 entries to allow the simulator to stabilise
 
-      var dataEntry = data [data.Length - 1];
+      var dataEntry = WaitForDataEntry ();
 
       AssertSoilMoistureValuesAreCorrect (soilMoisturePercentage, dataEntry);
 
@@ -76,11 +76,11 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
       Console.WriteLine ("  Current soil moisture level: " + soilMoisturePercentage + "%");
 
-      if (soilMoisturePercentage > SoilMoisturePercentageMaximum)
-        Assert.Fail ("Soil moisture went above " + SoilMoisturePercentageMaximum + "%");
+      if (soilMoisturePercentage > ApplyOffset (SoilMoisturePercentageMaximum, ExpectedCalibratedValueOffset))
+        Assert.Fail ("Soil moisture went above " + ApplyOffset (SoilMoisturePercentageMaximum, ExpectedCalibratedValueOffset) + "%");
 
-      if (soilMoisturePercentage < SoilMoisturePercentageMinimum)
-        Assert.Fail ("Soil moisture dropped below " + SoilMoisturePercentageMinimum + "%");
+      if (soilMoisturePercentage < ApplyOffset (SoilMoisturePercentageMinimum, ExpectedCalibratedValueOffset))
+        Assert.Fail ("Soil moisture dropped below " + ApplyOffset (SoilMoisturePercentageMinimum, ExpectedCalibratedValueOffset) + "%");
     }
 
     public int AdjustSoilMoisturePercentageBasedOnPumpPin (int soilMoisturePercentage, bool pumpPinValue)
