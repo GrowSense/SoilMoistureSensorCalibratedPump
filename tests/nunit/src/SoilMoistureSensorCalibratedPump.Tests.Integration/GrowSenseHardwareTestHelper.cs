@@ -13,7 +13,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
     public int CalibratedValueMarginOfError = 8;
     public double TimeErrorMargin = 0.4;
     // Offset to take into account voltage drop via the simulated soil moisture sensor readings
-    public int ExpectedRawValueOffset = 10;
+    public int ExpectedRawValueOffset = -20;
     // Offset to take into account voltage drop via the simulated soil moisture sensor readings
     public int ExpectedCalibratedValueOffset = 2;
     public bool CalibrationIsReversedByDefault = true;
@@ -123,7 +123,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 
       SendDeviceCommand (cmd);
     }
-
 
     public void ReverseDeviceCalibration ()
     {
