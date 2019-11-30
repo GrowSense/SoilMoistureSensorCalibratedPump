@@ -9,7 +9,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
     public int SoilMoistureSimulatorPin = 9;
     public int SoilMoistureSimulatorPowerPin = 3;
     public int DelayAfterTurningSoilMoistureSensorOn = 3;
-    public int RawValueMarginOfError = 30;
+    public int RawValueMarginOfError = 42;
     public int CalibratedValueMarginOfError = 4;
     public double TimeErrorMargin = 0.4;
     public bool CalibrationIsReversedByDefault = true;
