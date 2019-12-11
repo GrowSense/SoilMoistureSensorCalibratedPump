@@ -10,4 +10,5 @@ sh inject-board-type.sh "nano" && \
 
 pio run --target upload --environment=nanoatmega328 --upload-port=$PORT_NAME || exit 1
 
+echo ""
 echo "Upload complete"

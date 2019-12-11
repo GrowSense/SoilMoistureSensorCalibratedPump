@@ -18,6 +18,7 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
             Console.WriteLine ("");
             Console.WriteLine ("=====");
             Console.WriteLine ("Preparing test");
+            Console.WriteLine (TestContext.CurrentContext.Test.Name);
         }
 
         [TearDown]

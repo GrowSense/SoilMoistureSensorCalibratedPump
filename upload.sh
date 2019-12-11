@@ -6,4 +6,7 @@ fi
 
 echo "Port: $PORT_NAME"
 
-pio run -s --target upload --environment=nanoatmega328 --upload-port=$PORT_NAME
+pio run --target upload --environment=nanoatmega328 --upload-port=$PORT_NAME
+
+echo ""
+echo "Upload complete"

@@ -4,7 +4,6 @@ namespace SoilMoistureSensorCalibratedPump.Tests.Integration
 {
   public class SerialCommandTestHelper : GrowSenseIrrigatorHardwareTestHelper
   {
-
     public string Key = "";
     public string Value = "0";
     public string Label = "";
