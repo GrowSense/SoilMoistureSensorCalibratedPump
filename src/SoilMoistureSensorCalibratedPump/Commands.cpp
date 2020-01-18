@@ -32,11 +32,6 @@ void handleCommand(char* msg)
   Serial.print("Received message: ");
   Serial.println(msg);
         
-  char letter = msg[0];
-
-  Serial.print("Received message: ");
-  Serial.println(msg);
-
   if (isKeyValue(msg))
   {
     Serial.println("  Is key value");
@@ -62,6 +57,8 @@ void handleCommand(char* msg)
   }
   else
   {
+    char letter = msg[0];
+
     switch (letter)
     {
       case '#':
