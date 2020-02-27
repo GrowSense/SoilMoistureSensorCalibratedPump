@@ -21,9 +21,9 @@ bool checkMsgReady()
     byte b = Serial.read();
 
     // The end of a message
-    if ((b == ';'
-      || b == '\n'
-      || b == '\r')
+    if ((byte(b) == ';'
+      || byte(b) == '\n'
+      || byte(b) == '\r')
       && msgPosition > 0
       )
     {
@@ -59,9 +59,8 @@ bool checkMsgReady()
     }
     else // Message bytes
     {
-      // TODO: Remove if not needed. This shouldn't be needed because adding '\0' at the end of the message should be sufficient
-      //if (msgPosition == 0)
-      //  clearMsg(msgBuffer);
+      if (msgPosition == 0)
+        clearMsg(msgBuffer);
 
       msgBuffer[msgPosition] = b;
       msgLength = msgPosition+1;
@@ -75,8 +74,7 @@ bool checkMsgReady()
       //}
     }
 
-    // TODO: Remove if not needed.
-    //delay(1);
+    delay(1);
   }
 
   return isMsgReady;
@@ -115,12 +113,10 @@ void printMsg(char msg[MAX_MSG_LENGTH])
 
 void clearMsg(char msgBuffer[MAX_MSG_LENGTH])
 {
-  // TODO: Remove if not needed
-  //for (int i = 0; i < MAX_MSG_LENGTH; i++)
-  //{
-  //  msgBuffer[i] = '\0';
-  //}
-  msgBuffer[0] = '\0';
+  for (int i = 0; i < MAX_MSG_LENGTH; i++)
+  {
+    msgBuffer[i] = '\0';
+  }
 }
 
 char getCmdChar(char msg[MAX_MSG_LENGTH], int characterPosition)
